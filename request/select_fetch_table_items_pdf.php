@@ -181,6 +181,9 @@ $pdf->Cell(55, 5, '', 0, 0, 'L', true);
 $pdf->SetFont('Arial', 'B', 10);
 
 //hello world
+//hello world
+//hello world
+//hello world
 $warranty_value;
 // $warranty_date = date ('M d, Y', strtotime('+'.$row[0]['supplier_warranty'].' years', strtotime($row[0]['date_acquired'])));
 $warranty_date = date ('M d, Y');
