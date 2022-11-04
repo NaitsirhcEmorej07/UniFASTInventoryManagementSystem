@@ -6,9 +6,9 @@
         $TBL_UNIFAST_USER ="tbl_unifast_user";
 
         $dbhost = "localhost";
-        $dbuser = "root";
-        $dbpass = "";
-        $db = "inventory_system";
+        $dbuser = "unifastgov_lmpc";
+        $dbpass = "7_d[MJB(#l8A";
+        $db = "unifastgov_ufdb";
         $conn = mysqli_connect($dbhost, $dbuser, $dbpass,$db);
         
         
