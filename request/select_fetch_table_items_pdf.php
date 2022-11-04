@@ -180,7 +180,7 @@ $pdf->Cell(105.5, 5, $row[0]['item_description'], 0, 0, 'L', true);
 $pdf->Cell(55, 5, '', 0, 0, 'L', true);
 $pdf->SetFont('Arial', 'B', 10);
 
-
+//hello
 $warranty_value;
 // $warranty_date = date ('M d, Y', strtotime('+'.$row[0]['supplier_warranty'].' years', strtotime($row[0]['date_acquired'])));
 $warranty_date = date ('M d, Y');
