@@ -181,24 +181,26 @@ $pdf->Cell(55, 5, '', 0, 0, 'L', true);
 $pdf->SetFont('Arial', 'B', 10);
 
 
-// $warranty_value;
-// // $warranty_date = date ('M d, Y', strtotime('+'.$row[0]['supplier_warranty'].' years', strtotime($row[0]['date_acquired'])));
-// $warranty_date = date ('M d, Y');
-// $currentdate =  date('M d, Y');
+$warranty_value;
+// $warranty_date = date ('M d, Y', strtotime('+'.$row[0]['supplier_warranty'].' years', strtotime($row[0]['date_acquired'])));
+$warranty_date = date ('M d, Y');
 
-// if($warranty_date >= $currentdate)
-// {
-// 	$warranty_value = "UNTIL " . $warranty_date;
-// }
-// else
-// {
-// 	$warranty_value = "ENDED SINCE " . $warranty_date;
-// }
+$currentdate =  date('M d, Y');
+$currentdate = date('Y-m-d', strtotime($currentdate));
+
+if($warranty_date >= $currentdate)
+{
+	$warranty_value = "UNTIL " . $warranty_date;
+}
+else 
+{
+	$warranty_value = "ENDED SINCE " . $warranty_date;
+}
 
 
 $pdf->Cell(26, 5, 'WARRANTY:', 0, 0, 'L', true);
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(57.5, 5, strtoupper($row[0]['supplier_warranty']) . ' YEAR/S', 0, 0, 'L', true);
+$pdf->Cell(57.5, 5, strtoupper($currentdate), 0, 0, 'L', true);
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 10);
 
