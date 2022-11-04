@@ -7,7 +7,7 @@ if(!isset($_SESSION))
 }
 
 $username = $_SESSION['user_login'];
-$sql1 = "update user_tbl set status='0' where username = '$username' ";
+$sql1 = "update " . $TBL_UNIFAST_USER  . " set status='0' where username = '$username' ";
 $conn->query($sql1) or die ($conn->error); 
 
 

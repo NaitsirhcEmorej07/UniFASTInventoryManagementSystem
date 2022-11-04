@@ -12,7 +12,7 @@ include_once '../connections/db-connect.php';
     $ics_number = $_POST['ics_number'];
 
 
-    $sql = "update end_user_tbl 
+    $sql = "update " . $TBL_END_USER  . " 
     set 
     end_user =UPPER('$end_user'), 
     date_received =UPPER('$date_received'), 

@@ -6,7 +6,7 @@ include("connections/db-connect.php");
 //PHP QUERY FOR COS
 $sqlcos = "
 SELECT COUNT(employment_type)
-FROM end_user_list_tbl
+FROM " . $TBL_UNIFAST_STAFF  . "
 WHERE employment_type = 'COS' 
 ";
 $result = mysqli_query($conn, $sqlcos);
@@ -17,7 +17,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR PLANTILLA
 $sqlplantilla = "
 SELECT COUNT(employment_type)
-FROM end_user_list_tbl
+FROM " . $TBL_UNIFAST_STAFF  . "
 WHERE employment_type = 'PLANTILLA' 
 ";
 $result = mysqli_query($conn, $sqlplantilla);
@@ -32,7 +32,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR DAMAGED
 $sqldamaged = "
 SELECT COUNT(status)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE status = 'damaged' 
 ";
 $result = mysqli_query($conn, $sqldamaged);
@@ -43,7 +43,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR REPAIRED
 $sqlrepaired = "
 SELECT COUNT(status)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE status = 'repaired' 
 ";
 $result = mysqli_query($conn, $sqlrepaired);
@@ -54,7 +54,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR GOOD CONDITION
 $sqlgoodcondition = "
 SELECT COUNT(status)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE status = 'GOOD CONDITION' 
 ";
 $result = mysqli_query($conn, $sqlgoodcondition);
@@ -65,7 +65,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR RETURNED TO CHED
 $sqlrtc = "
 SELECT COUNT(status)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE status = 'RETURNED TO CHED' 
 ";
 $result = mysqli_query($conn, $sqlrtc);
@@ -76,7 +76,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR MISSING
 $sqlmissing = "
 SELECT COUNT(status)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE status = 'MISSING'
 ";
 $result = mysqli_query($conn, $sqlmissing);
@@ -87,7 +87,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR MISSING-PAID
 $sqlmissingpaid = "
 SELECT COUNT(status)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE status ='MISSING-PAID'
 ";
 $result = mysqli_query($conn, $sqlmissingpaid);
@@ -99,7 +99,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR MISSING-REPLACED
 $sqlmissingreplaced = "
 SELECT COUNT(status)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE status ='MISSING-REPLACED'
 ";
 $result = mysqli_query($conn, $sqlmissingreplaced);
@@ -113,7 +113,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR OED UNIT
 $sqloed = "
 SELECT COUNT(unit)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE unit = 'OED UNIT' 
 ";
 $result = mysqli_query($conn, $sqloed);
@@ -124,7 +124,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR ADFIN UNIT
 $sqladfin = "
 SELECT COUNT(unit)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE unit = 'ADFIN UNIT' 
 ";
 $result = mysqli_query($conn, $sqladfin);
@@ -135,7 +135,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR ADVOC UNIT
 $sqladvoc = "
 SELECT COUNT(unit)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE unit = 'ADVOC UNIT' 
 ";
 $result = mysqli_query($conn, $sqladvoc);
@@ -146,7 +146,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR BILLING UNIT
 $sqlbilling = "
 SELECT COUNT(unit)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE unit = 'BILLING UNIT' 
 ";
 $result = mysqli_query($conn, $sqlbilling);
@@ -157,7 +157,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR PMED UNIT
 $sqlpmed = "
 SELECT COUNT(unit)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE unit = 'PMED UNIT' 
 ";
 $result = mysqli_query($conn, $sqlpmed);
@@ -168,7 +168,7 @@ while ($row = mysqli_fetch_array($result)) {
 //PHP QUERY FOR ICT UNIT
 $sqlict = "
 SELECT COUNT(unit)
-FROM end_user_tbl
+FROM " . $TBL_END_USER  . "
 WHERE unit = 'ICT UNIT' 
 ";
 $result = mysqli_query($conn, $sqlict);

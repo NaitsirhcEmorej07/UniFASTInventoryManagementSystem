@@ -112,21 +112,21 @@ class PDF extends PDF_MC_Table
 if (isset($_GET["unit"])) {
     $sql = "
     SELECT
-    inventory_tbl.item, 
-    inventory_tbl.item_description,
-    end_user_tbl.serial_number,
-    end_user_tbl.end_user,
-    end_user_tbl.date_received,
-    end_user_tbl.designation,
-	end_user_tbl.abbreviation,
-    inventory_tbl.unit_cost
+    " . $TBL_INVENTORY . ".item, 
+    " . $TBL_INVENTORY . ".item_description,
+    " . $TBL_END_USER  . ".serial_number,
+    " . $TBL_END_USER  . ".end_user,
+    " . $TBL_END_USER  . ".date_received,
+    " . $TBL_END_USER  . ".designation,
+	" . $TBL_END_USER  . ".abbreviation,
+    " . $TBL_INVENTORY . ".unit_cost
     
     
-    FROM inventory_tbl
-    INNER JOIN end_user_tbl ON inventory_tbl.id=end_user_tbl.id 
+    FROM " . $TBL_INVENTORY . "
+    INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id=" . $TBL_END_USER  . ".id 
     
 
-    WHERE end_user_tbl.unit='".$_GET["unit"]."' ORDER BY end_user_tbl.designation DESC, end_user_tbl.end_user
+    WHERE " . $TBL_END_USER  . ".unit='".$_GET["unit"]."' ORDER BY " . $TBL_END_USER  . ".designation DESC, " . $TBL_END_USER  . ".end_user
     ";
 
 	$result = mysqli_query($conn, $sql);

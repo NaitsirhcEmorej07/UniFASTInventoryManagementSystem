@@ -119,21 +119,21 @@ class PDF extends PDF_MC_Table
 if (isset($_GET["itm1"])) {
     $sql = "
     SELECT
-    inventory_tbl.item,
-    inventory_tbl.item_description,
-	inventory_tbl.received_by,
-	inventory_tbl.supplier_warranty,
-    end_user_tbl.date_received,
-    end_user_tbl.serial_number,
-    end_user_tbl.end_user,
-    end_user_tbl.unit,
-    end_user_tbl.designation,
-    inventory_tbl.unit_cost
+    " . $TBL_INVENTORY . ".item,
+    " . $TBL_INVENTORY . ".item_description,
+	" . $TBL_INVENTORY . ".received_by,
+	" . $TBL_INVENTORY . ".supplier_warranty,
+    " . $TBL_END_USER  . ".date_received,
+    " . $TBL_END_USER  . ".serial_number,
+    " . $TBL_END_USER  . ".end_user,
+    " . $TBL_END_USER  . ".unit,
+    " . $TBL_END_USER  . ".designation,
+    " . $TBL_INVENTORY . ".unit_cost
     FROM
-    inventory_tbl
-    INNER JOIN end_user_tbl ON inventory_tbl.id = end_user_tbl.id
+    " . $TBL_INVENTORY . "
+    INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id = " . $TBL_END_USER  . ".id
     WHERE
-    end_user_tbl.end_user = '" . $_GET["itm1"] . "'";
+    " . $TBL_END_USER  . ".end_user = '" . $_GET["itm1"] . "'";
 
     $result = mysqli_query($conn, $sql);
     $resultCheck = mysqli_num_rows($result);

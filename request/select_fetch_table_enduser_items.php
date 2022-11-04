@@ -5,20 +5,20 @@ include_once '../connections/db-connect.php';
 if (isset($_POST["itm1"])) {
     $sql = "
     SELECT
-    inventory_tbl.item, 
-    inventory_tbl.item_description,
-    inventory_tbl.received_by,
-    inventory_tbl.supplier_warranty,
-    end_user_tbl.date_received,
-    end_user_tbl.serial_number,
-    inventory_tbl.unit_cost
+    " . $TBL_INVENTORY . ".item, 
+    " . $TBL_INVENTORY . ".item_description,
+    " . $TBL_INVENTORY . ".received_by,
+    " . $TBL_INVENTORY . ".supplier_warranty,
+    " . $TBL_END_USER  . ".date_received,
+    " . $TBL_END_USER  . ".serial_number,
+    " . $TBL_INVENTORY . ".unit_cost
     
     
-    FROM inventory_tbl
-    INNER JOIN end_user_tbl ON inventory_tbl.id=end_user_tbl.id 
+    FROM " . $TBL_INVENTORY . "
+    INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id=" . $TBL_END_USER  . ".id 
     
 
-    WHERE end_user_tbl.end_user ='".$_POST["itm1"]."' ";
+    WHERE " . $TBL_END_USER  . ".end_user ='".$_POST["itm1"]."' ";
     
 
 

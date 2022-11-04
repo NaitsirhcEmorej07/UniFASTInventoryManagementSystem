@@ -5,7 +5,7 @@ include_once '../connections/db-connect.php';
 
 if (isset($_POST["inventoryid"])) {
 
-    $query = "select serial_number from end_user_tbl where id='".$_POST["inventoryid"]."' ";
+    $query = "select serial_number from " . $TBL_END_USER  . " where id='".$_POST["inventoryid"]."' ";
     $result = mysqli_query($conn, $query);
 
     while($row = mysqli_fetch_array($result))

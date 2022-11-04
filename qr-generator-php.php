@@ -2,7 +2,7 @@
 include ("connections/db-connect.php");
 
 
-      $query = "select id from inventory_tbl";
+      $query = "select id from " . $TBL_INVENTORY . "";
       $result = mysqli_query($conn, $query);
       $countrow = mysqli_num_rows($result);
 

@@ -11,7 +11,7 @@ $ics_number = $_POST['ics_number'];
 $status = $_POST['status'];
 
 
-$sql1 = "select unit, designation, abbreviation,  employment_type from end_user_list_tbl where full_name = '" . $_POST["end_user"] . "' ";
+$sql1 = "select unit, designation, abbreviation,  employment_type from " . $TBL_UNIFAST_STAFF  . " where full_name = '" . $_POST["end_user"] . "' ";
 $result = mysqli_query($conn, $sql1);
 while ($row = mysqli_fetch_array($result)) {
 
@@ -21,7 +21,7 @@ while ($row = mysqli_fetch_array($result)) {
     $employment_type =  $row["employment_type"];
 }
 
-$sql = "update end_user_tbl 
+$sql = "update " . $TBL_END_USER  . " 
     set 
     end_user =UPPER('$end_user'), 
     date_received =UPPER('$date_received'), 
@@ -54,7 +54,7 @@ $conn->query($sql) or die($conn->error);
 
 
 //QUERY FOR ITEM LOGS GET END USER 
-$sqlx = "select id, end_user from end_user_tbl where serial_number = '$serial_number' ";
+$sqlx = "select id, end_user from " . $TBL_END_USER  . " where serial_number = '$serial_number' ";
 $result = mysqli_query($conn, $sqlx);
 while ($row = mysqli_fetch_array($result)) {
     $qenduser = $row["end_user"];
@@ -63,7 +63,7 @@ while ($row = mysqli_fetch_array($result)) {
 
 
 //QUERY FOR ITEM LOGS GET ENDUSER
-$sqlx = "select end_user from item_logs_tbl where serial_number = '$serial_number' order by log_id desc ";
+$sqlx = "select end_user from " . $TBL_LOGS  . " where serial_number = '$serial_number' order by log_id desc ";
 $result = mysqli_query($conn, $sqlx);
 $row = mysqli_fetch_row($result);
 
@@ -74,11 +74,11 @@ $qenduser = $row[0];
     
 if (strtoupper(trim($end_user)) != strtoupper(trim($qenduser))) {
         //QUERY FOR ITEM LOGS
-        $sqlnew = "insert into item_logs_tbl(id, serial_number, end_user, status, date_received) values(UPPER('$qid'), UPPER('$serial_number'), UPPER('$end_user'), UPPER('$status'), UPPER('$date_received'))";
+        $sqlnew = "insert into " . $TBL_LOGS  . "(id, serial_number, end_user, status, date_received) values(UPPER('$qid'), UPPER('$serial_number'), UPPER('$end_user'), UPPER('$status'), UPPER('$date_received'))";
         $conn->query($sqlnew) or die ($conn->error); 
 
         //QUERY FOR UPDATING IS_ASSIGNED
-        $sqlass = "update end_user_tbl 
+        $sqlass = "update " . $TBL_END_USER  . " 
         set 
         is_assigned =UPPER('1')
         where enduser_id='$enduser_id' ";
@@ -87,7 +87,7 @@ if (strtoupper(trim($end_user)) != strtoupper(trim($qenduser))) {
         //QUERY FOR SUM OF IS_ASSIGNED
         $sqlnew1 = "
         SELECT SUM(is_assigned)
-        FROM end_user_tbl
+        FROM " . $TBL_END_USER  . "
         WHERE id='$qid'
         ";
         $result = mysqli_query($conn, $sqlnew1);
@@ -97,7 +97,7 @@ if (strtoupper(trim($end_user)) != strtoupper(trim($qenduser))) {
 
 
         //QUERY FOR ASSIGNED FOR INVENTORY TABLE
-        $sqlnew2 = "Update inventory_tbl set assigned ='$count' where id='$qid' ";
+        $sqlnew2 = "Update " . $TBL_INVENTORY . " set assigned ='$count' where id='$qid' ";
         $conn->query($sqlnew2) or die ($conn->error); 
 }
 

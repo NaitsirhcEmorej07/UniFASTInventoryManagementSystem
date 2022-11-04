@@ -36,7 +36,7 @@ include ("connections/db-connect.php");
                                 <select type="text" id="selectplantilla"  name="unit" class="form-select selectplantilla" aria-label="Default select example" style="width: 270px; margin-left:2px">
                                     <option>--SELECT PLANTILLA POSITION--</option>    
                                     <?php
-                                    $sqlplantilla = "select full_name from end_user_list_tbl where employment_type = 'PLANTILLA' order by full_name asc";
+                                    $sqlplantilla = "select full_name from " . $TBL_UNIFAST_STAFF  . " where employment_type = 'PLANTILLA' order by full_name asc";
                                     $result = $conn->query($sqlplantilla);
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {

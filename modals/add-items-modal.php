@@ -22,7 +22,7 @@ if (isset($_POST['submitBT'])) {
 
     $totalcost = $quantity * $unit_cost;
 
-    $sql = "insert into inventory_tbl(item, item_description, quantity, unit, unit_cost, total_cost, date_acquired, supplier, received_by, received_from, supplier_contact, supplier_warranty) 
+    $sql = "insert into " .$TBL_INVENTORY. "(item, item_description, quantity, unit, unit_cost, total_cost, date_acquired, supplier, received_by, received_from, supplier_contact, supplier_warranty) 
     values(
     UPPER('$item'), 
     UPPER('$item_description'), 
@@ -45,7 +45,7 @@ if (isset($_POST['submitBT'])) {
     }
 
 
-    $query = "select id from inventory_tbl order by id asc";
+    $query = "select id from " . $TBL_INVENTORY . " order by id asc";
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($result)) {
         $id = $row["id"];
@@ -53,7 +53,7 @@ if (isset($_POST['submitBT'])) {
 
 
     for ($i = 0; $i < $quantity; $i++) {
-        $sql2 = "insert into end_user_tbl(id) values('$id')";
+        $sql2 = "insert into " . $TBL_END_USER  . "(id) values('$id')";
         $conn->query($sql2) or die($conn->error);
     }
 
@@ -194,7 +194,7 @@ if (isset($_POST['submitBT'])) {
                                 <select type="text" name="received-by" class="form-select" aria-label="Default select example">
                                     <option selected>-SELECT PLANTILLA-</option>
                                     <?php
-                                    $sqlplantilla = "select full_name from end_user_list_tbl where employment_type = 'PLANTILLA' order by full_name asc";
+                                    $sqlplantilla = "select full_name from " . $TBL_UNIFAST_STAFF . " where employment_type = 'PLANTILLA' order by full_name asc";
                                     $result = $conn->query($sqlplantilla);
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {

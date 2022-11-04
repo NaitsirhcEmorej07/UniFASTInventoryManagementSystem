@@ -50,7 +50,7 @@ if(isset($_POST['submitBTNstaff']))
           $emp_type = "NO RECORD";
       }
 
-    $sql = "insert into end_user_list_tbl(id_no,full_name,designation,unit,abbreviation,employment_type,status) 
+    $sql = "insert into " . $TBL_UNIFAST_STAFF  . "(id_no,full_name,designation,unit,abbreviation,employment_type,status) 
     values(
     UPPER('$id_no'), 
     UPPER('$full_name'), 

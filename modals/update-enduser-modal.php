@@ -10,7 +10,7 @@ include("modals/end-user-modal.php");
 
 
 //query for fetching in table
-$sql = "select full_name from end_user_list_tbl order by full_name asc";
+$sql = "select full_name from " . $TBL_UNIFAST_STAFF  . " order by full_name asc";
 $result = $conn->query($sql);
 ?>
 

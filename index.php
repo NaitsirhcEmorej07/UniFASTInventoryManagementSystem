@@ -13,14 +13,14 @@ if(isset($_POST['login']))
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    $sql = "select * FROM user_tbl where username = '$username' and password ='$password'";
+    $sql = "select * FROM " . $TBL_UNIFAST_USER  . " where username = '$username' and password ='$password'";
     $user = $conn->query($sql) or die ($conn->error);
     $row = $user->fetch_assoc();
     $total = $user->num_rows;
 
     if($total>0) 
     {
-        $sql1 = "update user_tbl set status='1' where username = '$username' and password ='$password' ";
+        $sql1 = "update " . $TBL_UNIFAST_USER  . " set status='1' where username = '$username' and password ='$password' ";
         $conn->query($sql1) or die ($conn->error); 
 
         $_SESSION['user_login'] = $row['username'];

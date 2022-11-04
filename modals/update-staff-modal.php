@@ -16,7 +16,7 @@ if(isset($_POST['submitstaffBTN']))
     $unit =$_POST['unit'];
     $statusstaff=$_POST['statusstaff'];
 
-    $sql = "update end_user_list_tbl set 
+    $sql = "update " . $TBL_UNIFAST_STAFF  . " set 
     id_no = UPPER('$id_no'), 
     full_name = UPPER('$full_name'), 
     designation = UPPER('$designation'),
@@ -28,7 +28,7 @@ if(isset($_POST['submitstaffBTN']))
 
 
     $sql1="
-    update end_user_tbl set unit=UPPER('$unit') where end_user = '$full_name'
+    update " . $TBL_END_USER  . " set unit=UPPER('$unit') where end_user = '$full_name'
     ";
     $conn->query($sql1) or die ($conn->error); 
 

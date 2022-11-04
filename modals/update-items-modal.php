@@ -22,7 +22,7 @@ if (isset($_POST['submitBTN'])) {
 
     $totalcost = $quantity * $unit_cost;
 
-    $sql = "update inventory_tbl set 
+    $sql = "update " . $TBL_INVENTORY . " set 
     item =UPPER('$item'), 
     item_description =UPPER('$item_description'), 
     quantity =UPPER('$quantity'),  
@@ -41,7 +41,7 @@ if (isset($_POST['submitBTN'])) {
         //echo '<script> alert("Records Updated!"); </script>';
     }
 
-    $sql1 = "select count(id) from end_user_tbl where id='$itemid' ";
+    $sql1 = "select count(id) from " . $TBL_END_USER  . " where id='$itemid' ";
     $result = mysqli_query($conn, $sql1);
     while ($row = mysqli_fetch_array($result)) {
         $count = $row["count(id)"];
@@ -52,11 +52,11 @@ if (isset($_POST['submitBTN'])) {
     if ($count >= $quantity) {
         $difference = $count - $quantity;
 
-        $sql3 = "delete FROM end_user_tbl WHERE id=$itemid ORDER BY enduser_id DESC LIMIT $difference ;";
+        $sql3 = "delete FROM " . $TBL_END_USER  . " WHERE id=$itemid ORDER BY enduser_id DESC LIMIT $difference ;";
         $conn->query($sql3) or die($conn->error);
     } else {
         for ($i = $count; $i < $quantity; $i++) {
-            $sql3 = "insert into end_user_tbl (id) values ($itemid);";
+            $sql3 = "insert into " . $TBL_END_USER  . " (id) values ($itemid);";
             $conn->query($sql3) or die($conn->error);
         }
     }
@@ -201,7 +201,7 @@ if (isset($_POST['submitBTN'])) {
                                     Materials Requisition To</label>
                                 <select type="text" id="received_by" name="received-by" class="form-select" aria-label="Default select example">
                                 <?php
-                                    $sqlplantilla = "select full_name from end_user_list_tbl where employment_type = 'PLANTILLA' order by full_name asc";
+                                    $sqlplantilla = "select full_name from " . $TBL_UNIFAST_STAFF  . " where employment_type = 'PLANTILLA' order by full_name asc";
                                     $result = $conn->query($sqlplantilla);
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {

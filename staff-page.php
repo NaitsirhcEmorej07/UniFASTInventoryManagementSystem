@@ -1,7 +1,7 @@
 <?php
 include("navbar.php");
 include("connections/db-connect.php");
-$query = "select * from end_user_list_tbl order by status , full_name ASC";
+$query = "select * from " . $TBL_UNIFAST_STAFF  . " order by status , full_name ASC";
 $result = mysqli_query($conn, $query);
 
 

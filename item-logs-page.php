@@ -3,15 +3,15 @@ include("navbar.php");
 include("connections/db-connect.php");
 
 $sql = "select
-inventory_tbl.item, 
-item_logs_tbl.serial_number, 
-item_logs_tbl.end_user,
-item_logs_tbl.status,
-item_logs_tbl.date_received
+" . $TBL_INVENTORY . ".item, 
+" . $TBL_LOGS  . ".serial_number, 
+" . $TBL_LOGS  . ".end_user,
+" . $TBL_LOGS  . ".status,
+" . $TBL_LOGS  . ".date_received
 
 
-FROM inventory_tbl
-INNER JOIN item_logs_tbl ON inventory_tbl.id=item_logs_tbl.id order by date_received DESC";
+FROM " . $TBL_INVENTORY . "
+INNER JOIN " . $TBL_LOGS  . " ON " . $TBL_INVENTORY . ".id=" . $TBL_LOGS  . ".id order by date_received DESC";
 $result = mysqli_query($conn, $sql);
 
 

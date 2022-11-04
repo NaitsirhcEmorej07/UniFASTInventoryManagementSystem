@@ -120,27 +120,27 @@ if (isset($_GET["f1x"])) {
     $sql = "
     
     SELECT 
-    inventory_tbl.item,
-    inventory_tbl.item_description,
-    inventory_tbl.supplier,
-    inventory_tbl.quantity,
-    inventory_tbl.unit,
-	inventory_tbl.date_acquired,
-	inventory_tbl.supplier_warranty,
-	inventory_tbl.received_by,
-    end_user_tbl.ics_number,
-    end_user_tbl.status,
-    end_user_tbl.serial_number,
-    end_user_tbl.inventory_item_number,
-    end_user_tbl.end_user,
-    end_user_tbl.date_received
+    " . $TBL_INVENTORY . ".item,
+    " . $TBL_INVENTORY . ".item_description,
+    " . $TBL_INVENTORY . ".supplier,
+    " . $TBL_INVENTORY . ".quantity,
+    " . $TBL_INVENTORY . ".unit,
+	" . $TBL_INVENTORY . ".date_acquired,
+	" . $TBL_INVENTORY . ".supplier_warranty,
+	" . $TBL_INVENTORY . ".received_by,
+    " . $TBL_END_USER  . ".ics_number,
+    " . $TBL_END_USER  . ".status,
+    " . $TBL_END_USER  . ".serial_number,
+    " . $TBL_END_USER  . ".inventory_item_number,
+    " . $TBL_END_USER  . ".end_user,
+    " . $TBL_END_USER  . ".date_received
 
     FROM
-    inventory_tbl
+    " . $TBL_INVENTORY . "
 
-    INNER JOIN end_user_tbl ON inventory_tbl.id = end_user_tbl.id
+    INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id = " . $TBL_END_USER  . ".id
     WHERE
-    end_user_tbl.id='".$_GET["f1x"]."' 
+    " . $TBL_END_USER  . ".id='".$_GET["f1x"]."' 
     
         
     ";
