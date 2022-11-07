@@ -52,7 +52,7 @@ if (isset($_POST['submitBT'])) {
     while ($row = mysqli_fetch_array($result)) {
         $id = $row["id"];
     }
-    echo($query);
+    echo($id);
 
     $i;
     for ($i = 0; $i < $quantity; $i++) {
