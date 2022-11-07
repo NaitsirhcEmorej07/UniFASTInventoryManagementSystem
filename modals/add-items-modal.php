@@ -53,7 +53,7 @@ if (isset($_POST['submitBT'])) {
     while ($row = mysqli_fetch_array($result)) {
         $id = $row["id"];
     }
-
+    echo($id ." ".  $query);
 
     for ($i = 0; $i < $quantity; $i++) {
         // $sql2 = "insert into " . $TBL_END_USER  . "(id) values($id)";
