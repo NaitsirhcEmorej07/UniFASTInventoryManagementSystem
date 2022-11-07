@@ -46,6 +46,8 @@ if (isset($_POST['submitBT'])) {
     }
 
 
+    $id;
+
     $query = "select id from " . $TBL_INVENTORY . " order by id asc";
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($result)) {
@@ -53,12 +55,13 @@ if (isset($_POST['submitBT'])) {
     }
 
 
-    // for ($i = 0; $i < $quantity; $i++) {
-    //     $sql2 = "insert into " . $TBL_END_USER  . "(id) values($id)";
-    //     $conn->query($sql2) or die($conn->error);
-    // }
+    for ($i = 0; $i < $quantity; $i++) {
+        // $sql2 = "insert into " . $TBL_END_USER  . "(id) values($id)";
+        // $conn->query($sql2) or die($conn->error);
+        echo($i);
+    }
 
-    echo($i);
+    
     
 }
 ?>
