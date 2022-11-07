@@ -25,14 +25,14 @@ if (isset($_POST['submitBTN'])) {
     $sql = "update " . $TBL_INVENTORY . " set 
     item =UPPER('$item'), 
     item_description =UPPER('$item_description'), 
-    quantity =UPPER('$quantity'),  
+    quantity =UPPER($quantity),  
     unit =UPPER('$unit'), 
-    unit_cost =UPPER('$unit_cost'), 
-    total_cost =UPPER('$totalcost'), 
+    unit_cost =UPPER($unit_cost), 
+    total_cost =UPPER($totalcost), 
     date_acquired =UPPER('$date_acquired'),  
     supplier =UPPER('$supplier'), 
     supplier_contact =UPPER('$supplier_contact'), 
-    supplier_warranty =UPPER('$supplier_warranty'), 
+    supplier_warranty =UPPER($supplier_warranty), 
     received_by =UPPER('$received_by'),  
     received_from =UPPER('$received_from') 
     where id='$itemid' ";
@@ -55,6 +55,7 @@ if (isset($_POST['submitBTN'])) {
         $sql3 = "delete FROM " . $TBL_END_USER  . " WHERE id=$itemid ORDER BY enduser_id DESC LIMIT $difference ;";
         $conn->query($sql3) or die($conn->error);
     } else {
+        $i;
         for ($i = $count; $i < $quantity; $i++) {
             $sql3 = "insert into " . $TBL_END_USER  . " (id) values ($itemid);";
             $conn->query($sql3) or die($conn->error);
