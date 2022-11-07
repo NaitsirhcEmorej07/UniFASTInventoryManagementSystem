@@ -26,16 +26,16 @@ if (isset($_POST['submitBT'])) {
     values(
     UPPER('$item'), 
     UPPER('$item_description'), 
-    UPPER('$quantity'),
+    UPPER($quantity),
     UPPER('$unit'),
-    UPPER('$unit_cost'),
-    UPPER('$totalcost'),
+    UPPER($unit_cost),
+    UPPER($totalcost),
     UPPER('$date_acquired'), 
     UPPER('$supplier'), 
     UPPER('$received_by'), 
     UPPER('$received_from'), 
     UPPER('$supplier_contact'),
-    UPPER('$supplier_warranty') )";
+    UPPER($supplier_warranty) )";
     // $conn->query($sql) or die($conn->error);
     echo($sql);
 
