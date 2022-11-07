@@ -36,7 +36,8 @@ if (isset($_POST['submitBT'])) {
     UPPER('$received_from'), 
     UPPER('$supplier_contact'),
     UPPER('$supplier_warranty') )";
-    $conn->query($sql) or die($conn->error);
+    // $conn->query($sql) or die($conn->error);
+    echo($sql);
 
     if ($conn) {
         header('Location: inventory-items.php');

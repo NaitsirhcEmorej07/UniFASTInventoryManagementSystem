@@ -5,10 +5,17 @@
         $TBL_LOGS = "tbl_ims_logs";
         $TBL_UNIFAST_USER ="tbl_unifast_user";
 
+
         $dbhost = "localhost";
-        $dbuser = "unifastgov_lmpc";
-        $dbpass = "7_d[MJB(#l8A";
-        $db = "unifastgov_ufdb";
+        $dbuser = "root";
+        $dbpass = "";
+        $db = "inventory_system";
+
+
+        // $dbhost = "localhost";
+        // $dbuser = "unifastgov_lmpc";
+        // $dbpass = "7_d[MJB(#l8A";
+        // $db = "unifastgov_ufdb";
         $conn = mysqli_connect($dbhost, $dbuser, $dbpass,$db);
         
         
@@ -19,5 +26,5 @@
         else
         {
             return $conn;
-        }
+        } 
 ?>
