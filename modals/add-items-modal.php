@@ -51,13 +51,14 @@ if (isset($_POST['submitBT'])) {
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($result)) {
         $id = $row["id"];
+        echo($id);
     }
-    echo($id);
+  
 
     $i;
     for ($i = 0; $i < $quantity; $i++) {
-        // $sql2 = "insert into " . $TBL_END_USER  . "(id) values($id)";
-        // $conn->query($sql2) or die($conn->error);
+        $sql2 = "insert into " . $TBL_END_USER  . "(id) values($id)";
+        $conn->query($sql2) or die($conn->error);
        
     }
 
