@@ -54,7 +54,7 @@ if (isset($_POST['submitBT'])) {
 
 
     for ($i = 0; $i < $quantity; $i++) {
-        $sql2 = "insert into " . $TBL_END_USER  . "(id) values('$id')";
+        $sql2 = "insert into " . $TBL_END_USER  . "(id) values($id)";
         $conn->query($sql2) or die($conn->error);
     }
 
