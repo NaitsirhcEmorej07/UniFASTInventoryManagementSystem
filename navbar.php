@@ -233,18 +233,19 @@ include("modals/mr-report-modal.php");
                     $("#desc5").html(data.supplier);
                     $.each(data.end_users, function(key, value) {
                         var convert_date_received = new Date(value.date_received);
+                        convert_date_received = convert_date_received.toDateString().toUpperCase().slice(4)
                         $('#testing').append(`<tr>
                                                 <td>` + (parseInt(1) + parseInt(key)) + `</td>
-                                                <td>${value.serial_number}</td>
-                                                <td style='text-align:center;'>${value.inventory_item_number}</td>
-                                                <td>${value.ics_number}</td>
-                                                <td>${value.status}</td>
-                                                <td>${data.received_by}</td>
-                                                <td>${value.end_user}</td>
-                                                <td>${convert_date_received.toDateString().toUpperCase().slice(4)}</td>
+                                                <td>${value.serial_number ? value.serial_number : ""}</td>
+                                                <td style='text-align:center;'>${value.inventory_item_number ? value.inventory_item_number : ""}</td>
+                                                <td>${value.ics_number ? value.ics_number : ""}</td>
+                                                <td>${value.status ? value.status : ""}</td>
+                                                <td>${data.received_by ? data.received_by : ""}</td>
+                                                <td>${value.end_user ? value.end_user : ""}</td>
+                                                <td>${convert_date_received == null || convert_date_received == '0000-00-00' || convert_date_received == '' || convert_date_received == 'JAN 01 1970' ? "" : convert_date_received}</td>
 
-                                                <td>'<button type="button" id="buttonf" value="' + ${value.enduser_id} + '" class="btn btn-primary btn-sm updateuser" href="#">Edit</button>' + '&nbsp;' + 
-                                                    '<button type="button" id="buttonhistory" value="' + ${value.serial_number} + '" class="btn btn-warning btn-sm itemhistory" href="#" data-bs-toggle="modal" data-bs-target="#item-history-modal">History</button>'
+                                                <td><button type="button" id="buttonf" value="${value.enduser_id}" class="btn btn-primary btn-sm updateuser" href="#">Edit</button>
+                                                    <button type="button" id="buttonhistory" value="${value.serial_number}" class="btn btn-warning btn-sm itemhistory" href="#" data-bs-toggle="modal" data-bs-target="#item-history-modal">History</button>
                                                 </td>
 
                                             </tr>`);
