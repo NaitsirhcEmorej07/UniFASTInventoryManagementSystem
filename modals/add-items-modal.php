@@ -40,7 +40,7 @@ if (isset($_POST['submitBT'])) {
     // echo($sql);
 
     if ($conn) {
-        header('Location: inventory-items.php');
+        // header('Location: inventory-items.php');
     } else {
         echo '<script> alert("Data Not Saved!"); </script>';
     }
@@ -52,13 +52,13 @@ if (isset($_POST['submitBT'])) {
     while ($row = mysqli_fetch_array($result)) {
         $id = $row["id"];
     }
-    echo($id ." ".  $query);
+    echo($query);
 
     $i;
     for ($i = 0; $i < $quantity; $i++) {
         // $sql2 = "insert into " . $TBL_END_USER  . "(id) values($id)";
         // $conn->query($sql2) or die($conn->error);
-        echo($i);
+       
     }
 
     
