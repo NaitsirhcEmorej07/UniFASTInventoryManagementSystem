@@ -171,7 +171,7 @@ if (isset($_POST['submitBTN'])) {
                                         <path d="M0 4a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H1a1 1 0 0 1-1-1V4zm3 0a2 2 0 0 1-2 2v4a2 2 0 0 1 2 2h10a2 2 0 0 1 2-2V6a2 2 0 0 1-2-2H3z" />
                                     </svg>
                                     Unit Cost</label>
-                                <input type="number" id="unit-cost" name="unit-cost" class="form-control" required>
+                                <input type="text" id="unit-cost" name="unit-cost" class="form-control" required>
                             </div>
 
                             <div class="col-6 mb-2">
