@@ -129,7 +129,58 @@ include("modals/mr-report-modal.php");
             $('#table1').DataTable();
         });
 
+        //UNIFAST GENERATED SERIAL
+        $(document).ready(function() {
+            $(document).on('click', '.generateserial', function(event) {
+                // var end_user_id = $('#btn_done_useredit').val();
 
+
+                var current_date = new Date();
+                
+                const day = current_date.getDate();
+                const month = current_date.getMonth() + 1;
+                const year = current_date.getFullYear();
+                const hours = current_date.getHours();
+                const minutes = current_date.getMinutes();
+                const seconds = current_date.getSeconds();
+                const milliseconds = current_date.getMilliseconds();
+
+                var milliseconds_length = String(milliseconds).length;
+                
+                var new_milliseconds;
+
+                if(milliseconds_length == 3){
+                    new_milliseconds = milliseconds;
+                }
+                else if(milliseconds_length == 2){
+                    new_milliseconds = "0" + milliseconds;
+                }
+                else if(milliseconds_length == 1){
+                    new_milliseconds = "00" + milliseconds;
+                }
+
+                var unifastgenerated = "IMSGS";
+
+                const date_time = year+""+month+""+day+"-"+hours+""+minutes+""+seconds+""+new_milliseconds;
+
+                // alert(unifastgenerated+""+date_time);
+                
+                $('#serial_number').val(unifastgenerated +"-"+date_time);
+                
+                // $.ajax({
+                //     url: "request/select_fetch_auto_generate_serial_number.php",
+                //     method: "POST",
+                //     data: {
+                //         end_user_id: end_user_id
+                //     },
+                //     dataType: "json",
+                //     success: function(data) {
+                //         console.log(serial + data.enduser_id);
+                        
+                //     }
+                // })
+            });
+        });
 
 
 
@@ -197,16 +248,16 @@ include("modals/mr-report-modal.php");
                 dataType: "json",
                 success: function(data) {
 
-                    
+
 
                     console.log(data);
 
                     // const newdate = new Date();
                     // newdate= data.date_acquired.setFullYear(data.date_acquired.getFullYear() + 1);
                     // console.log(newdate);
-                    
+
                     var warranty_value;
-                    
+
                     const warranty_end = new Date(data.date_acquired);
                     warranty_end.setFullYear(warranty_end.getFullYear() + parseInt(data.supplier_warranty));
                     console.log(warranty_end);
@@ -214,13 +265,10 @@ include("modals/mr-report-modal.php");
                     var current_date = new Date();
                     console.log(current_date);
 
-                    if(warranty_end>=current_date)
-                    {
-                        warranty_value =  "UNTIL " + warranty_end.toDateString().toUpperCase().slice(4);
+                    if (warranty_end >= current_date) {
+                        warranty_value = "UNTIL " + warranty_end.toDateString().toUpperCase().slice(4);
                         $("#warranty").css("color", "green");
-                    }
-                    else
-                    {
+                    } else {
                         warranty_value = "ENDED SINCE " + warranty_end.toDateString().toUpperCase().slice(4);
                         $("#warranty").css("color", "red");
                     }
@@ -229,11 +277,11 @@ include("modals/mr-report-modal.php");
                     $('#testing').html(""); // CLEAR SCREAN BEFORE FETCHING TO AVOID DUPLICATION
                     $("#desc2").html(data.item_description);
                     $("#dateacquired").html(convert_date_acquired.toDateString().toUpperCase().slice(4));
-                    $("#warranty").html(warranty_value); 
+                    $("#warranty").html(warranty_value);
                     $("#desc5").html(data.supplier);
                     $.each(data.end_users, function(key, value) {
                         var convert_date_received = new Date(value.date_received);
-                        convert_date_received = convert_date_received.toDateString().toUpperCase().slice(4)
+                        convert_date_received = convert_date_received.toDateString().toUpperCase().slice(4);
                         $('#testing').append(`<tr>
                                                 <td>` + (parseInt(1) + parseInt(key)) + `</td>
                                                 <td>${value.serial_number ? value.serial_number : ""}</td>
@@ -287,7 +335,7 @@ include("modals/mr-report-modal.php");
         //FUNCTION FOR UPDATING END USER
         $(document).ready(function() {
             $(document).on('click', '.updatesubmit', function() {
-                document.getElementById('wrapper').style.display ='none';
+                document.getElementById('wrapper').style.display = 'none';
                 $.ajax({
                     url: "request/update_enduser.php",
                     method: "POST",
@@ -350,7 +398,7 @@ include("modals/mr-report-modal.php");
         });
 
 
-        //FUNCTION FOR FETCHING TABLE FOR END USER DETAILS
+        //FUNCTION FOR FETCHING TABLE FOR STAFF ITEMS DETAILS
         $(document).ready(function() {
             $(document).on('click', '.viewstaffitems', function(event) {
 
@@ -378,15 +426,15 @@ include("modals/mr-report-modal.php");
 
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
-
                         $.each(data, function(key, value) {
+                            var convert_date = new Date(value.date_received);
                             var rowCount = $('#tablestaffitems >tbody >tr').length;
                             $('#tablestaffitemsbody').append("<tr>\
-                                                <td>" + (parseInt(key) + 1) + "</td>\
+                                                <td style='text-align:left'>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
                                                 <td>" + value.received_by + "</td>\
-                                                <td>" + value.date_received + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.supplier_warranty + " year/s." + "</td>\
                                                 <td>" + value.serial_number + "</td>\
                                                 <td>₱ " + php1.format(value.unit_cost) + " </td>\
@@ -418,12 +466,12 @@ include("modals/mr-report-modal.php");
                     },
                     dataType: "json",
                     success: function(data) {
-                        
+
                         console.log(data);
                         $('#historybody').html("");
 
                         $.each(data, function(key, value) {
-                            var convert_date_acquired = new Date(value.date_received );
+                            var convert_date_acquired = new Date(value.date_received);
                             $('#historybody').append("<tr>\
                                                 <td>" + value.end_user + "</td>\
                                                 <td>" + convert_date_acquired.toDateString().toUpperCase().slice(4) + "</td>\
@@ -739,22 +787,23 @@ include("modals/mr-report-modal.php");
                     document.getElementById("plantillaposition").innerHTML = data.designation;
                     document.getElementById("plantillaunit").innerHTML = data.unit;
                     document.getElementById("pesosign").innerHTML = "₱ ";
-                    
+
                     $.each(data.plantillaitem, function(key, value) {
+                        var convert_date = new Date(value.date_acquired);
                         $('#table-body-mr-reports').append("<tr>\
-                                                <td style='text-align:center'>" + (parseInt(key) + 1) + "</td>\
+                                                <td style='text-align:left'>" + (parseInt(key) + 1) + "</td>\
                                                 <td style='text-align:center'>" + value.item + "</td>\
                                                 <td style='text-align:center'>" + value.item_description + "</td>\
                                                 <td style='text-align:center'>" + value.quantity + "</td>\
                                                 <td style='text-align:center'>" + value.assigned + "</td>\
-                                                <td style='text-align:center'>₱ " + php1.format(value.unit_cost) + "</td>\
-                                                <td style='text-align:center'>₱ " + php1.format(value.total_cost) + "</td>\
-                                                <td style='text-align:center'>" + value.date_acquired + "</td>\
+                                                <td style='text-align:left'>₱ " + php1.format(value.unit_cost) + "</td>\
+                                                <td style='text-align:left'>₱ " + php1.format(value.total_cost) + "</td>\
+                                                <td style='text-align:left'>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td style='text-align:center'>" + value.supplier_warranty + " YEAR/S</td>\
                                             </tr>");
                         total += parseInt(value.total_cost);
                         document.getElementById("totalcostmrd").innerHTML = php1.format(total);
-                        
+
                         totalquantity += parseInt(value.quantity);
                         $('#totalitemsmr').html(totalquantity);
                     })
@@ -767,23 +816,20 @@ include("modals/mr-report-modal.php");
 
             var status = $('#status').find(":selected").val();
             if (status == "RETURNED TO CHED") {
-                document.getElementById('wrapper').style.display ='block'; 
+                document.getElementById('wrapper').style.display = 'block';
                 // $('#end_user').text("");
                 // $('.select2-selection').val("");
                 // $('.select2-selection--single').toArray[0];
                 $('#end_user').val("");
-                
-            }
-            else
-            {
-                document.getElementById('wrapper').style.display ='none';
+
+            } else {
+                document.getElementById('wrapper').style.display = 'none';
             }
         });
 
         $(".closealert").click(function() {
-            document.getElementById('wrapper').style.display ='none'; 
+            document.getElementById('wrapper').style.display = 'none';
         });
-        
     </script>
 
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
