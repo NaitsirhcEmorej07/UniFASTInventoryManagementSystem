@@ -26,7 +26,7 @@ class PDF extends PDF_MC_Table
         $this->SetFont('Arial', '', 8);
         $this->Cell(0, 5, 'Page ' . $this->PageNo(), 0, 0, 'C');
 		$this->SetAlpha(0.5);
-		$this->Image('../imgfpdf\uf_logo_seal2.png', 177 / 2 , 75, 120, 120);  
+		$this->Image('../imgfpdf/uf_logo_seal2.png', 177 / 2 , 75, 120, 120);  
 		$this->SetAlpha(1);
     }
     function cellMultiColor($stringParts)
@@ -176,11 +176,11 @@ $pdf->SetFont('Arial', 'B', 8);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(0, 0, 128);
 $pdf->Cell(6, 5, 'No.', 0, 0, 'C', true);
-$pdf->Cell(40, 5, 'END-USER', 0, 0, 'C', true);
+$pdf->Cell(44, 5, 'END-USER', 0, 0, 'C', true);
 $pdf->Cell(20, 5, 'POSITION', 0, 0, 'C', true);
 $pdf->Cell(50, 5, 'ITEM', 0, 0, 'C', true);
-$pdf->Cell(92, 5, 'ITEM DESCRIPTION', 0, 0, 'C', true);
-$pdf->Cell(26, 5, 'SERIAL NUMBER', 0, 0, 'C', true);
+$pdf->Cell(84, 5, 'ITEM DESCRIPTION', 0, 0, 'C', true);
+$pdf->Cell(30, 5, 'SERIAL NUMBER', 0, 0, 'C', true);
 $pdf->Cell(18, 5, 'UNIT COST', 0, 0, 'C', true);
 $pdf->Cell(25, 5, 'DATE RECEIVED', 0, 0, 'C', true);
 
@@ -202,12 +202,12 @@ if($key % 2 == 0){
 
 
 $pdf->Cell(6, 5, $key + 1, 0, 0, 'C', true);
-$pdf->Cell(40, 5, $item['end_user'], 0, 0, 'L', true);
+$pdf->Cell(44, 5, $item['end_user'], 0, 0, 'L', true);
 $pdf->Cell(20, 5, $item['abbreviation'], 0, 0, 'C', true);
-$pdf->Cell(50, 5, $item['item'], 0, 0, 'L', true);
-$pdf->Cell(92, 5, $item['item_description'], 0, 0, 'L', true);
-$pdf->Cell(26, 5, $item['serial_number'], 0, 0, 'C', true);
-$pdf->Cell(18, 5,'P ' .  number_format($item['unit_cost']), 0, 0, 'L', true);
+$pdf->Cell(50, 5, $item['item'], 0, 0, 'C', true);
+$pdf->Cell(84, 5, $item['item_description'], 0, 0, 'C', true);
+$pdf->Cell(30, 5, $item['serial_number'], 0, 0, 'C', true);
+$pdf->Cell(18, 5,'P ' .  number_format($item['unit_cost']), 0, 0, 'C', true);
 $pdf->Cell(25, 5, $item['date_received'], 0, 0, 'C', true);
 $pdf->Ln();
 }

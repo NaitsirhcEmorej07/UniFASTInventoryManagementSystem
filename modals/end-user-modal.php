@@ -73,17 +73,17 @@ include("connections/db-connect.php");
                         <div id="resettable" class="row">
                             <div class="col-sm-12">
                                 <!-- style="width: 100%;" for datatables -->
-                                <table id="table2" class="table table-striped" style="font-size: 14px;">
+                                <table id="table2" class="table table-hover table-striped table-responsive" style="font-size: 14px;">
                                     <thead>
                                         <tr>
                                             <td style="width:3%">No.</td>
-                                            <td style="width:10%">Serial Number</td>
+                                            <td style="width:12%; text-align:center;">Serial Number</td>
                                             <td style="width:10%; text-align:center;">Inventory Item Number</td>
-                                            <td style="width:10%">ICS Number</td>
+                                            <td style="width:10%; text-align:center;">ICS Number</td>
                                             <td style="width:13%">Status</td>
                                             <td>MR To</td>
                                             <td>End User</td>
-                                            <td style="width:9%">Date Recieved</td>
+                                            <td style="width:9%">Date Received</td>
                                             <td style="width:12%">Action</td>
                                         </tr>
                                     </thead>

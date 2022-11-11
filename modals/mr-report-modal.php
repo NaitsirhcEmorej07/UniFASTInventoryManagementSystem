@@ -68,18 +68,18 @@ include ("connections/db-connect.php");
                             <hr>
                                 
                                 <div>
-                                    <table id="table-unit-reports" class="table table-striped" style="font-size:14px">
+                                    <table id="table-unit-reports" class="table table-striped" style="font-size:14px;">
                                         <thead>
                                             <tr>
-                                                <th style="width:4%; text-align:center">No.</th>
-                                                <th style="width:14%; text-align:center">Item</th>   
+                                                <th style="width:4%; text-align:left">No.</th>
+                                                <th style="width:16%; text-align:center">Item</th>   
                                                 <th style="width:20%; text-align:center">Item Description</th>
-                                                <th style="text-align:center">Quantity</th>
-                                                <th style="text-align:center">Assigned</th>
-                                                <th style="text-align:center">Unit Cost</th>
-                                                <th style="text-align:center">Total Cost</th>
-                                                <th style="text-align:center">Date Acquired</th>
-                                                <th style="text-align:center">Warranty</th>
+                                                <th style="width:8%; text-align:center">Quantity</th>
+                                                <th style="width:8%; text-align:center">Assigned</th>
+                                                <th style="width:10%; text-align:left">Unit Cost</th>
+                                                <th style="width:10%; text-align:left">Total Cost</th>
+                                                <th style="width:10%; text-align:left">Date Acquired</th>
+                                                <th style="width:14%;; text-align:center">Warranty</th>
                                             </tr>   
                                         </thead>
                                         <tbody id="table-body-mr-reports">

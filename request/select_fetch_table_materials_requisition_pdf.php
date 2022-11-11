@@ -27,11 +27,11 @@ class PDF extends PDF_MC_Table
         $this->Cell(0, 5, 'Page ' . $this->PageNo(), 0, 0, 'C');
 		$this->SetAlpha(0.5);
 		if($this->PageNo()==1){
-			$this->Image('../imgfpdf\uf_logo_seal2.png', 177 / 2 , 75, 120, 120);  
+			$this->Image('../imgfpdf/uf_logo_seal2.png', 177 / 2 , 75, 120, 120);  
 			$this->SetAlpha(1);
 		}
 		else{
-			$this->Image('../imgfpdf\uf_logo_seal2.png', 177 / 2 , 90 / 2, 120, 120);  
+			$this->Image('../imgfpdf/uf_logo_seal2.png', 177 / 2 , 90 / 2, 120, 120);  
 			$this->SetAlpha(1);
 		}
     }

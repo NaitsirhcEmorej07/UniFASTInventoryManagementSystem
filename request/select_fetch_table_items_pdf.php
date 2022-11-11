@@ -30,7 +30,7 @@ class PDF extends PDF_MC_Table
 		if($this->PageNo()==1){
 			$this->Image('../imgfpdf/uf_logo_seal2.png', 177 / 2 , 75, 120, 120);  
 			$this->SetAlpha(1);
-		}
+		} 
 		else{
 			$this->Image('../imgfpdf/uf_logo_seal2.png', 177 / 2 , 90 / 2, 120, 120);  
 			$this->SetAlpha(1);
@@ -180,26 +180,24 @@ $pdf->Cell(105.5, 5, $row[0]['item_description'], 0, 0, 'L', true);
 $pdf->Cell(55, 5, '', 0, 0, 'L', true);
 $pdf->SetFont('Arial', 'B', 10);
 
-$warranty_value;
-// $warranty_date = date ('M d, Y', strtotime('+'.$row[0]['supplier_warranty'].' years', strtotime($row[0]['date_acquired'])));
-$warranty_date = date ('M d, Y');
 
-$currentdate =  date('M d, Y');
-$currentdate = date('Y-m-d', strtotime($currentdate));
+$warranty_date = date ('Y-m-d', strtotime('+'.$row[0]['supplier_warranty'].' years', strtotime($row[0]['date_acquired'])));
+
+$currentdate =  date('Y-m-d');
 
 if($warranty_date >= $currentdate)
 {
-	$warranty_value = "UNTIL " . $warranty_date;
+	$warranty_value = "UNTIL " . date('M d, Y', strtotime ($warranty_date) );
 }
 else 
 {
-	$warranty_value = "ENDED SINCE " . $warranty_date;
+	$warranty_value = "ENDED SINCE " . date('M d, Y', strtotime ($warranty_date) );
 }
 
 
 $pdf->Cell(26, 5, 'WARRANTY:', 0, 0, 'L', true);
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(57.5, 5, strtoupper($currentdate), 0, 0, 'L', true);
+$pdf->Cell(57.5, 5, strtoupper($warranty_value), 0, 0, 'L', true);
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 10);
 
@@ -219,13 +217,13 @@ $pdf->SetFont('Arial', 'B', 8);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(0, 0, 128);
 $pdf->Cell(6, 5, 'No.', 0, 0, 'C', true);
-$pdf->Cell(38.71428571428571, 5, 'SERIAL NUMBER', 0, 0, 'C', true);
-$pdf->Cell(41.71428571428571, 5, 'INVENTORY ITEM NUMBER', 0, 0, 'C', true);
-$pdf->Cell(35.71428571428571, 5, 'ICS NUMBER', 0, 0, 'C', true);
-$pdf->Cell(38.71428571428571, 5, 'STATUS', 0, 0, 'C', true);
-$pdf->Cell(38.71428571428571, 5, 'MR TO', 0, 0, 'C', true);
-$pdf->Cell(38.71428571428571, 5, 'END USER', 0, 0, 'C', true);
-$pdf->Cell(38.71428571428571, 5, 'DATE RECEIVED', 0, 0, 'C', true);
+$pdf->Cell(30, 5, 'SERIAL NUMBER', 0, 0, 'C', true);
+$pdf->Cell(41, 5, 'INVENTORY ITEM NUMBER', 0, 0, 'C', true);
+$pdf->Cell(23, 5, 'ICS NUMBER', 0, 0, 'C', true);
+$pdf->Cell(30, 5, 'STATUS', 0, 0, 'C', true);
+$pdf->Cell(58, 5, 'MR TO', 0, 0, 'C', true);
+$pdf->Cell(61, 5, 'END USER', 0, 0, 'C', true);
+$pdf->Cell(28, 5, 'DATE RECEIVED', 0, 0, 'C', true);
 
 $pdf->Ln();
 
@@ -243,13 +241,13 @@ foreach ($row as $key => $item) {
 	
 	
 	$pdf->Cell(6, 5, $key + 1, 0, 0, 'C', true);
-	$pdf->Cell(38.71428571428571, 5, $item['serial_number'], 'L', 0, 'C', true);
-	$pdf->Cell(41.71428571428571, 5, $item['inventory_item_number'], 'L', 0, 'C', true);
-	$pdf->Cell(35.71428571428571, 5, $item['ics_number'], 'L', 0, 'C', true);
-	$pdf->Cell(38.71428571428571, 5, $item['status'], 'L', 0, 'C', true);
-	$pdf->Cell(38.71428571428571, 5, $item['received_by'], 'L', 0, 'C', true);
-	$pdf->Cell(38.71428571428571, 5, $item['end_user'], 'L', 0, 'C', true);
-	$pdf->Cell(38.71428571428571, 5, strtoupper($new_date), 'L', 0, 'C', true);
+	$pdf->Cell(30, 5, $item['serial_number'], 0, 0, 'C', true);
+	$pdf->Cell(41, 5, $item['inventory_item_number'], 0, 0, 'C', true);
+	$pdf->Cell(23, 5, $item['ics_number'], 0, 0, 'C', true);
+	$pdf->Cell(30, 5, $item['status'], 0, 0, 'C', true);
+	$pdf->Cell(58, 5, $item['received_by'], 0, 0, 'C', true);
+	$pdf->Cell(61, 5, $item['end_user'], 0, 0, 'C', true);
+	$pdf->Cell(28, 5, strtoupper($new_date), 0, 0, 'C', true);
 	$pdf->Ln();
 	}
 

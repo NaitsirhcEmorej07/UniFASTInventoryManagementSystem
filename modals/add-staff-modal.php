@@ -18,7 +18,7 @@ if(isset($_POST['submitBTNstaff']))
 
     switch ($_POST['designation']) {
         case "EXECUTIVE DIRECTOR":
-            $abbrebiation = "EXECUTIVE DIRECTOR";
+            $abbrebiation = "EXECUTIVE DIRECTOR"; 
             $emp_type = "PLANTILLA";
             break;
         case "SUPERVISING EDUCATION PROGRAM SPECIALIST":

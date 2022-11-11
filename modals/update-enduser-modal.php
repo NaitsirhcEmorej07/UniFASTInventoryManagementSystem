@@ -62,7 +62,7 @@ $result = $conn->query($sql);
                                     Serial Number</label>
                                 <div class="d-flex justify-content-left">
                                     <input type="text" name="serial_number" id="serial_number" class="form-control" autocomplete="off" style="width: 190px; display:flex;" required>
-                                    <div id="generateserial" class="generateserial btn btn-secondary" style="padding:2px; width: 32px; font-size:14px; font-weight:500; text-align: left;">N/A</div>
+                                    <div id="generateserial" class="generateserial btn btn-warning" style="padding:2px; width: 32px; font-size:14px; font-weight:500; text-align: left;">N/A</div>
                                 </div>
 
                             </div>

@@ -18,7 +18,7 @@ class PDF extends PDF_MC_Table
         $this->Image('../imgfpdf/Header.png', 128.9 / 2, 2, -200);        
 		        $this->Cell(277, 25, '', 0, 0);
         $this->Ln();
-        }
+        } 
     }
     function Footer()
     {
@@ -194,13 +194,13 @@ $pdf->SetFont('Arial', 'B', 8);
 $pdf->SetTextColor(255, 255, 255);
 $pdf->SetFillColor(0, 0, 128);
 $pdf->Cell(6, 5, 'No.', 0, 0, 'C', true);
-$pdf->Cell(40, 5, 'ITEM', 0, 0, 'C', true);
-$pdf->Cell(95, 5, 'ITEM DESCRIPTION', 0, 0, 'C', true);
-$pdf->Cell(37, 5, 'MR TO', 0, 0, 'C', true);
+$pdf->Cell(48, 5, 'ITEM', 0, 0, 'C', true);
+$pdf->Cell(80, 5, 'ITEM DESCRIPTION', 0, 0, 'C', true);
+$pdf->Cell(44, 5, 'MR TO', 0, 0, 'C', true);
 $pdf->Cell(27, 5, 'DATE RECEIVED', 0, 0, 'C', true);
 $pdf->Cell(25, 5, 'WARRANTY', 0, 0, 'C', true);
-$pdf->Cell(26, 5, 'SERIAL NUMBER', 0, 0, 'C', true);
-$pdf->Cell(24, 5, 'UNIT COST', 0, 0, 'C', true);
+$pdf->Cell(30, 5, 'SERIAL NUMBER', 0, 0, 'C', true);
+$pdf->Cell(20, 5, 'UNIT COST', 0, 0, 'C', true);
 
 $pdf->Ln();
 
@@ -220,13 +220,13 @@ foreach ($row as $key => $item) {
 	
 	
 	$pdf->Cell(6, 5, $key + 1, 0, 0, 'C', true);
-	$pdf->Cell(40, 5, $item['item'], 'L', 0, 'L', true);
-	$pdf->Cell(95, 5, $item['item_description'], 'L', 0, 'L', true);
-	$pdf->Cell(37, 5, $item['received_by'], 'L', 0, 'L', true);
-	$pdf->Cell(27, 5, $item['date_received'], 'L', 0, 'C', true);
-	$pdf->Cell(25, 5, $item['supplier_warranty'] . " YEAR/S", 'L', 0, 'C', true);
-	$pdf->Cell(26, 5, $item['serial_number'], 'L', 0, 'C', true);
-	$pdf->Cell(24, 5, 'P '.number_format($item['unit_cost']), 'L', 0, 'C', true);
+	$pdf->Cell(48, 5, $item['item'], 0, 0, 'L', true);
+	$pdf->Cell(80, 5, $item['item_description'], 0, 0, 'C', true);
+	$pdf->Cell(44, 5, $item['received_by'], 0, 0, 'L', true);
+	$pdf->Cell(27, 5, $item['date_received'], 0, 0, 'C', true);
+	$pdf->Cell(25, 5, $item['supplier_warranty'] . " YEAR/S", 0, 0, 'C', true);
+	$pdf->Cell(30, 5, $item['serial_number'], 0, 0, 'C', true);
+	$pdf->Cell(20, 5, 'P '.number_format($item['unit_cost']), 0, 0, 'C', true);
 	$pdf->Ln();
 	}
 
