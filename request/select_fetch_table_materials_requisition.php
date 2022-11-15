@@ -12,6 +12,7 @@ if (isset($_GET["plantilla"])) {
     $sql = "
     SELECT item, 
     item_description, 
+    unit,
     quantity, 
     assigned, 
     unit_cost, 

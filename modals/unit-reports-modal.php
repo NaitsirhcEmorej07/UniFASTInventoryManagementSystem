@@ -36,13 +36,13 @@
                                             <thead>
                                                 <tr>
                                                     <th style="width: 3%;">No.</th>
-                                                    <th style="width: 16%;">Position</th>
-                                                    <th style="width: 16%;">End User</th>
-                                                    <th style="width: 11%;">Date Received</th>
+                                                    <th style="width: 15%;">Position</th>
+                                                    <th style="width: 14%;">End User</th>
+                                                    <th style="width: 10%;">Date Received</th>
                                                     <th style="width: 15%;">Item</th>
                                                     <th style="width: 17%;">Item Description</th>
-                                                    <th style="width: 10%;">Serial Number</th>
-                                                    <th style="width: 7%;">Unit Cost</th>
+                                                    <th style="width: 12%;">Serial Number</th>
+                                                    <th style="width: 9%;">Unit Cost</th>
                                                 </tr>   
                                             </thead>
                                             <tbody id="table-body-unit-reports">

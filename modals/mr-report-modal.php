@@ -33,7 +33,7 @@ include ("connections/db-connect.php");
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-10">
-                                <select type="text" id="selectplantilla"  name="unit" class="form-select selectplantilla" aria-label="Default select example" style="width: 270px; margin-left:2px">
+                                <select type="text" id="selectplantilla"  name="unit" class="form-select selectplantilla" aria-label="Default select example" style="width: 300px; margin-left:2px">
                                     <option>--SELECT PLANTILLA POSITION--</option>    
                                     <?php
                                     $sqlplantilla = "select full_name from " . $TBL_UNIFAST_STAFF  . " where employment_type = 'PLANTILLA' order by full_name asc";
@@ -72,14 +72,13 @@ include ("connections/db-connect.php");
                                         <thead>
                                             <tr>
                                                 <th style="width:4%; text-align:left">No.</th>
-                                                <th style="width:16%; text-align:center">Item</th>   
-                                                <th style="width:20%; text-align:center">Item Description</th>
-                                                <th style="width:8%; text-align:center">Quantity</th>
-                                                <th style="width:8%; text-align:center">Assigned</th>
+                                                <th style="width:16%; text-align:left">Item</th>   
+                                                <th style="width:25%; text-align:left">Item Description</th>
+                                                <th style="width:10%; text-align:left">Quantity</th>
                                                 <th style="width:10%; text-align:left">Unit Cost</th>
                                                 <th style="width:10%; text-align:left">Total Cost</th>
-                                                <th style="width:10%; text-align:left">Date Acquired</th>
-                                                <th style="width:14%;; text-align:center">Warranty</th>
+                                                <th style="width:10%; text-align:center">Date Acquired</th>
+                                                <th style="width:15%;; text-align:center">Warranty</th>
                                             </tr>   
                                         </thead>
                                         <tbody id="table-body-mr-reports">

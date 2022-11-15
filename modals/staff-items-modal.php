@@ -38,6 +38,9 @@ include("connections/db-connect.php");
                                 <label style="font-size:16px; font-weight:500">NAME:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size:16px" id="enduser">......</label> <br>
                                 <label style="font-size:14px; font-weight:500">DESIGNATION:</label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size:14px" id="position">......</label> <br>
                                 <label style="font-size:14px; font-weight:500">UNIT: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size:14px" id="unit1">......</label> <br>
+                                <label style="font-size:14px; font-weight:500">TOTAL ITEMS: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label id="stafftotalitems" style="font-size:14px; ">------</label> <br>
+                                <label style="font-size:14px; font-weight:500">TOTAL COST: </label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<label style="font-size:14px;">₱</label>&nbsp;<label id="stafftotalcost" style="font-size:14px; ">------</label>
+                                
                             </div>
                             <div class="col-2">
                                 <a id='btn_pdf' class="btn btn-danger btn-sm" target="_blank" href="request\select_fetch_table_enduser_items_pdf.php?itm1=" style="font-size:14px; width: 100%;" role="button">
@@ -50,17 +53,17 @@ include("connections/db-connect.php");
                         <hr>
                         <div class="row">
                             <div class="col-12">
-                                <table id="tablestaffitems" class="table table-striped" style="width: 100%; font-size:13px;">
+                                <table id="tablestaffitems" class="table table-striped" style="width: 100%; font-size:14px;">
                                     <thead>
                                         <tr>
-                                            <td style="width:3%;">No.</td>
-                                            <td style="width:16%;">Item</td>
-                                            <td style="width:25%;">Item Description</td>
-                                            <td style="width:20%;">MR to</td>
-                                            <td style="width:10%;">Date Received</td>
-                                            <td style="width:7%;">Warranty</td>
-                                            <td style="width:11%;">Serial Number</td>
-                                            <td style="width:8%;" id="unitcost">Unit Cost</td>
+                                            <td style="width:3%; text-align:left;">No.</td>
+                                            <td style="width:17%; text-align:left;">Item</td>
+                                            <td style="width:25%; text-align:left;">Item Description</td>
+                                            <td style="width:16%;">MR to</td>
+                                            <td style="width:12%;">Date Received</td>
+                                            <td style="width:16%; text-align:center;">Warranty</td>
+                                            <td style="width:16%; text-align:center;">Serial Number</td>
+                                            <td style="width:12%; text-align:center;" id="unitcost">Unit Cost</td>
                                         </tr>
                                     </thead>
                                     <tbody id="tablestaffitemsbody">
@@ -77,10 +80,6 @@ include("connections/db-connect.php");
                     </div>
 
                     <div class="modal-footer">
-                        <div class="col-12 d-flex justify-content-start">
-                            <p>Total Cost: </p> &nbsp;&nbsp;
-                            <p>₱</p>&nbsp;<p id="stafftotalcost" style="font-weight: 500;">??????</p>
-                        </div>
                     </div>
                 </form>
 

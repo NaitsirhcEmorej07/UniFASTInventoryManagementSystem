@@ -9,6 +9,7 @@ if (isset($_POST["itm1"])) {
     " . $TBL_INVENTORY . ".item_description,
     " . $TBL_INVENTORY . ".received_by,
     " . $TBL_INVENTORY . ".supplier_warranty,
+    " . $TBL_INVENTORY . ".date_acquired,
     " . $TBL_END_USER  . ".date_received,
     " . $TBL_END_USER  . ".serial_number,
     " . $TBL_INVENTORY . ".unit_cost

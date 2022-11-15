@@ -136,7 +136,7 @@ include("modals/mr-report-modal.php");
 
 
                 var current_date = new Date();
-                
+
                 const day = current_date.getDate();
                 const month = current_date.getMonth() + 1;
                 const year = current_date.getFullYear();
@@ -146,27 +146,25 @@ include("modals/mr-report-modal.php");
                 const milliseconds = current_date.getMilliseconds();
 
                 var milliseconds_length = String(milliseconds).length;
-                
+
                 var new_milliseconds;
 
-                if(milliseconds_length == 3){
+                if (milliseconds_length == 3) {
                     new_milliseconds = milliseconds;
-                }
-                else if(milliseconds_length == 2){
+                } else if (milliseconds_length == 2) {
                     new_milliseconds = "0" + milliseconds;
-                }
-                else if(milliseconds_length == 1){
+                } else if (milliseconds_length == 1) {
                     new_milliseconds = "00" + milliseconds;
                 }
 
                 var unifastgenerated = "IMSGS";
 
-                const date_time = year+""+month+""+day+"-"+hours+""+minutes+""+seconds+""+new_milliseconds;
+                const date_time = year + "" + month + "" + day + "-" + hours + "" + minutes + "" + seconds + "" + new_milliseconds;
 
                 // alert(unifastgenerated+""+date_time);
-                
-                $('#serial_number').val(unifastgenerated +"-"+date_time);
-                
+
+                $('#serial_number').val(unifastgenerated + "-" + date_time);
+
                 // $.ajax({
                 //     url: "request/select_fetch_auto_generate_serial_number.php",
                 //     method: "POST",
@@ -176,7 +174,7 @@ include("modals/mr-report-modal.php");
                 //     dataType: "json",
                 //     success: function(data) {
                 //         console.log(serial + data.enduser_id);
-                        
+
                 //     }
                 // })
             });
@@ -424,26 +422,59 @@ include("modals/mr-report-modal.php");
                         $('#tablestaffitemsbody').html(""); // CLEAR SCREAN BEFORE FETCHING TO AVOID DUPLICATION
                         $('#stafftotalcost').html("0"); // CLEAR SCREAN BEFORE FETCHING TO AVOID DUPLICATION
 
+
+
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
-                            var convert_date = new Date(value.date_received);
-                            var rowCount = $('#tablestaffitems >tbody >tr').length;
-                            $('#tablestaffitemsbody').append("<tr>\
+                            var warranty_value;
+                            const warranty_end = new Date(value.date_acquired);
+                            warranty_end.setFullYear(warranty_end.getFullYear() + parseInt(value.supplier_warranty));
+
+                            var current_date = new Date();
+
+                            if (warranty_end >= current_date) {
+                                var convert_date = new Date(value.date_received);
+                                var rowCount = $('#tablestaffitems >tbody >tr').length;
+                                $('#tablestaffitemsbody').append("<tr>\
                                                 <td style='text-align:left'>" + (parseInt(key) + 1) + "</td>\
-                                                <td>" + value.item + "</td>\
-                                                <td>" + value.item_description + "</td>\
+                                                <td style='text-align:left'>" + value.item + "</td>\
+                                                <td style='text-align:left'>" + value.item_description + "</td>\
                                                 <td>" + value.received_by + "</td>\
                                                 <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
-                                                <td>" + value.supplier_warranty + " year/s." + "</td>\
-                                                <td>" + value.serial_number + "</td>\
-                                                <td>₱ " + php1.format(value.unit_cost) + " </td>\
+                                                <td style='text-align:center; color:green;'>" + "UNTIL " + warranty_end.toDateString().toUpperCase().slice(4) + "</td>\
+                                                <td style='text-align:center'>" + value.serial_number + "</td>\
+                                                <td style='text-align:center'>₱ " + php1.format(value.unit_cost) + " </td>\
                                             </tr>");
 
 
-                            //CODES FOR SUM OF ITEMS IN STAFF
-                            total += parseInt(value.unit_cost);
-                            document.getElementById("stafftotalcost").innerHTML = php1.format(total);
+                                //CODES FOR SUM OF ITEMS IN STAFF
+                                total += parseInt(value.unit_cost);
+                                document.getElementById("stafftotalcost").innerHTML = php1.format(total);
+                                document.getElementById("stafftotalitems").innerHTML = (parseInt(key) + 1);
+
+                            } else {
+                                var convert_date = new Date(value.date_received);
+                                var rowCount = $('#tablestaffitems >tbody >tr').length;
+                                $('#tablestaffitemsbody').append("<tr>\
+                                                <td style='text-align:left'>" + (parseInt(key) + 1) + "</td>\
+                                                <td style='text-align:left'>" + value.item + "</td>\
+                                                <td style='text-align:left'>" + value.item_description + "</td>\
+                                                <td>" + value.received_by + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
+                                                <td style='text-align:center; color:red;'>" + "ENDED " + warranty_end.toDateString().toUpperCase().slice(4) + "</td>\
+                                                <td style='text-align:center'>" + value.serial_number + "</td>\
+                                                <td style='text-align:center'>₱ " + php1.format(value.unit_cost) + " </td>\
+                                            </tr>");
+
+
+                                //CODES FOR SUM OF ITEMS IN STAFF
+                                total += parseInt(value.unit_cost);
+                                document.getElementById("stafftotalcost").innerHTML = php1.format(total);
+                                document.getElementById("stafftotalitems").innerHTML = (parseInt(key) + 1);
+                            }
+
+
                         })
                     }
                 });
@@ -509,11 +540,12 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
                                                 <td>" + value.end_user + "</td>\
-                                                <td>" + value.date_received + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
                                                 <td>" + value.serial_number + "</td>\
@@ -553,11 +585,12 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
                                                 <td>" + value.end_user + "</td>\
-                                                <td>" + value.date_received + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
                                                 <td>" + value.serial_number + "</td>\
@@ -597,11 +630,12 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
                                                 <td>" + value.end_user + "</td>\
-                                                <td>" + value.date_received + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
                                                 <td>" + value.serial_number + "</td>\
@@ -641,11 +675,12 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
                                                 <td>" + value.end_user + "</td>\
-                                                <td>" + value.date_received + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
                                                 <td>" + value.serial_number + "</td>\
@@ -684,12 +719,14 @@ include("modals/mr-report-modal.php");
                         console.log(data);
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
+
                         $.each(data, function(key, value) {
+                            var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
                                                 <td>" + value.end_user + "</td>\
-                                                <td>" + value.date_received + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
                                                 <td>" + value.serial_number + "</td>\
@@ -729,11 +766,12 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
                                                 <td>" + value.end_user + "</td>\
-                                                <td>" + value.date_received + "</td>\
+                                                <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
                                                 <td>" + value.serial_number + "</td>\
@@ -789,23 +827,52 @@ include("modals/mr-report-modal.php");
                     document.getElementById("pesosign").innerHTML = "₱ ";
 
                     $.each(data.plantillaitem, function(key, value) {
-                        var convert_date = new Date(value.date_acquired);
-                        $('#table-body-mr-reports').append("<tr>\
+                        var warranty_value;
+
+                        const warranty_end = new Date(value.date_acquired);
+                        warranty_end.setFullYear(warranty_end.getFullYear() + parseInt(value.supplier_warranty));
+
+                        var current_date = new Date();
+
+
+                        if (warranty_end >= current_date) {
+                            var convert_date = new Date(value.date_acquired);
+                            $('#table-body-mr-reports').append("<tr>\
                                                 <td style='text-align:left'>" + (parseInt(key) + 1) + "</td>\
-                                                <td style='text-align:center'>" + value.item + "</td>\
-                                                <td style='text-align:center'>" + value.item_description + "</td>\
-                                                <td style='text-align:center'>" + value.quantity + "</td>\
-                                                <td style='text-align:center'>" + value.assigned + "</td>\
+                                                <td style='text-align:left'>" + value.item + "</td>\
+                                                <td style='text-align:left'>" + value.item_description + "</td>\
+                                                <td style='text-align:left'>" + value.quantity + " " + value.unit + "</td>\
                                                 <td style='text-align:left'>₱ " + php1.format(value.unit_cost) + "</td>\
                                                 <td style='text-align:left'>₱ " + php1.format(value.total_cost) + "</td>\
-                                                <td style='text-align:left'>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
-                                                <td style='text-align:center'>" + value.supplier_warranty + " YEAR/S</td>\
+                                                <td style='text-align:center'>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
+                                                <td style='text-align:center; color:green;'>" + "UNTIL " + warranty_end.toDateString().toUpperCase().slice(4) + "</td>\
                                             </tr>");
-                        total += parseInt(value.total_cost);
-                        document.getElementById("totalcostmrd").innerHTML = php1.format(total);
+                            total += parseInt(value.total_cost);
+                            document.getElementById("totalcostmrd").innerHTML = php1.format(total);
 
-                        totalquantity += parseInt(value.quantity);
-                        $('#totalitemsmr').html(totalquantity);
+                            totalquantity += parseInt(value.quantity);
+                            $('#totalitemsmr').html(totalquantity);
+                        } else {
+                            var convert_date = new Date(value.date_acquired);
+                            $('#table-body-mr-reports').append("<tr>\
+                                                <td style='text-align:left'>" + (parseInt(key) + 1) + "</td>\
+                                                <td style='text-align:left'>" + value.item + "</td>\
+                                                <td style='text-align:left'>" + value.item_description + "</td>\
+                                                <td style='text-align:left'>" + value.quantity + " " + value.unit + "</td>\
+                                                <td style='text-align:left'>₱ " + php1.format(value.unit_cost) + "</td>\
+                                                <td style='text-align:left'>₱ " + php1.format(value.total_cost) + "</td>\
+                                                <td style='text-align:center'>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
+                                                <td style='text-align:center; color:red;'>" + "ENDED " + warranty_end.toDateString().toUpperCase().slice(4) + " </td>\
+                                            </tr>");
+                            total += parseInt(value.total_cost);
+                            document.getElementById("totalcostmrd").innerHTML = php1.format(total);
+
+                            totalquantity += parseInt(value.quantity);
+                            $('#totalitemsmr').html(totalquantity);
+
+                        }
+
+
                     })
                 }
             })
