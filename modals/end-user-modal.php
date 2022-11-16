@@ -33,7 +33,7 @@ include("connections/db-connect.php");
 
                     <div class="modal-header" style="background-color: #e3f2fd;">
                         <h5 class="modal-title">ITEM DETAILS</h5>
-                        <button type="submit" class="btn-close" formaction="inventory-items.php"></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <input type="hidden" name="" id="modal_id">
 

@@ -1,7 +1,7 @@
 <?php
 include("navbar.php");
 include("connections/db-connect.php");
-$query = "select * from " . $TBL_INVENTORY . "";
+$query = "select * from " . $TBL_INVENTORY . " ";
 $result = mysqli_query($conn, $query);
 
 ?>

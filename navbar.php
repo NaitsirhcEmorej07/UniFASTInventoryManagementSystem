@@ -126,7 +126,11 @@ include("modals/mr-report-modal.php");
     <script type="text/javascript">
         //FUNCTION FOR DATA TABLE
         $(document).ready(function() {
-            $('#table1').DataTable();
+            $('#table1').DataTable({
+                order: [
+                    [1, 'asc']
+                ],
+            });
         });
 
         //UNIFAST GENERATED SERIAL

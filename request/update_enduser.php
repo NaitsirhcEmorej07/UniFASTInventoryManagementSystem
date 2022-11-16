@@ -100,6 +100,12 @@ if (strtoupper(trim($end_user)) != strtoupper(trim($qenduser))) {
         $sqlnew2 = "Update " . $TBL_INVENTORY . " set assigned ='$count' where id='$qid' ";
         $conn->query($sqlnew2) or die ($conn->error); 
 }
+else
+{
+    $sql_update_date_received = "update " . $TBL_LOGS  . " set date_received = UPPER('$date_received')  
+    where serial_number = '$serial_number' and end_user = '$end_user' ";
+    $conn->query($sql_update_date_received) or die($conn->error);
+}
 
 
 
