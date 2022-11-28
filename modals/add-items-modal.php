@@ -51,7 +51,7 @@ if (isset($_POST['submitBT'])) {
     $result = mysqli_query($conn, $query);
     while ($row = mysqli_fetch_array($result)) {
         $id = $row["id"];
-        echo($id);
+        // echo($id);
     }
   
 

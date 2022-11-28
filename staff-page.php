@@ -44,7 +44,7 @@ $result = mysqli_query($conn, $query);
             <div class="row py-2">
                 <div class="col">
                     <div class="table table-responsive">
-                        <table id="table1" class="table table-striped" style="font-size: 15px;">
+                        <table id="table_staff" class="table table-striped" style="font-size: 15px;">
                         <h3 align="Center">
                             LIST OF UNIFAST STAFF
                         </h3>

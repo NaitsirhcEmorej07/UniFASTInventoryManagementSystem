@@ -131,6 +131,8 @@ include("modals/mr-report-modal.php");
                     [1, 'asc']
                 ],
             });
+
+            $('#table_staff').DataTable();
         });
 
         //UNIFAST GENERATED SERIAL

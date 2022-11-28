@@ -316,8 +316,8 @@ $dataPoints = array(
 
 <body>
 
-    <div style="position:absolute; top: 524px; width: 100%; height: 10px; background-color:white;z-index:1"></div>
-    <div style="position:absolute; top: 1022px; width: 100%; height: 10px; background-color:white;z-index:1 "></div>
+    <!-- <div style="position:absolute; top: 524px; width: 100%; height: 10px; background-color:white;z-index:1"></div>
+    <div style="position:absolute; top: 1022px; width: 100%; height: 10px; background-color:white;z-index:1 "></div> -->
     <div class="row d-flex justify-content-center">
         <div class="col-11 mt-3 mb-5">
             <div id="chartContainerBAR" style="height: 450px; width: 100%; z-index:-1"></div>
