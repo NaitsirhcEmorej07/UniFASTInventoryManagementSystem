@@ -67,7 +67,7 @@ if (isset($_POST['submitstaffBTN'])) {
     designation=UPPER('$designation'),
     abbreviation=UPPER('$abbrebiation'),
     employment_type=UPPER('$emp_type')
-    where end_user = '$full_name'
+    where enduser_list_id = '$enduserid'
     ";
     $conn->query($sql1) or die($conn->error);
 

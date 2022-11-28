@@ -11,7 +11,7 @@ $ics_number = $_POST['ics_number'];
 $status = $_POST['status'];
 
 
-$sql1 = "select unit, designation, abbreviation,  employment_type from " . $TBL_UNIFAST_STAFF  . " where full_name = '" . $_POST["end_user"] . "' ";
+$sql1 = "select unit, enduser_list_id, designation, abbreviation,  employment_type from " . $TBL_UNIFAST_STAFF  . " where full_name = '" . $_POST["end_user"] . "' ";
 $result = mysqli_query($conn, $sql1);
 while ($row = mysqli_fetch_array($result)) {
 
@@ -19,6 +19,7 @@ while ($row = mysqli_fetch_array($result)) {
     $designation =  $row["designation"];
     $abbreviation =  $row["abbreviation"];
     $employment_type =  $row["employment_type"];
+    $enduser_list_id =  $row["enduser_list_id"];
 }
 
 $sql = "update " . $TBL_END_USER  . " 
@@ -27,6 +28,7 @@ $sql = "update " . $TBL_END_USER  . "
     date_received =UPPER('$date_received'), 
     serial_number =UPPER('$serial_number'),  
     inventory_item_number =UPPER('$inventory_item_number'), 
+    enduser_list_id  =UPPER('$enduser_list_id'),
     ics_number =UPPER('$ics_number'),
     unit =UPPER('$unit'),
     designation =UPPER('$designation'),
