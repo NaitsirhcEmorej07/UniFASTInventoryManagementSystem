@@ -83,8 +83,8 @@ $result = mysqli_query($conn, $query);
                                         <td id="item5"><?= $unit ?></td>
                                         <td><?= $status ?></td>
                                         <td>
-                                            <button type="button" value="  <?= $enduser_list_id?>  " class="btn btn-success btn-sm viewstaff">Update</button>
-                                            <button type="button" value="  <?= $full_name?>  " class="btn btn-info btn-sm viewstaffitems" href="#" data-bs-toggle="modal" data-bs-target="#staff-items-modal">View Items</button>
+                                            <button type="button" value="<?=$enduser_list_id?>" class="btn btn-success btn-sm viewstaff">Update</button>
+                                            <button type="button" value="<?=$enduser_list_id?>" class="btn btn-info btn-sm viewstaffitems" id="<?= $enduser_list_id?>" href="#" data-bs-toggle="modal" data-bs-target="#staff-items-modal">View Items</button>
                                         </td>
                                     </tr>
                                 <?php

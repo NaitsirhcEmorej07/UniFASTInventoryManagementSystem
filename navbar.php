@@ -370,8 +370,15 @@ include("modals/mr-report-modal.php");
 
                         console.log(data);
                         $('#update-staff-modal').modal('show');
+
                         $('#enduserid').val(staffupdatebtn);
                         $('#id_no').val(data.id_no);
+                        $('#staff_first_name').val(data.first_name);
+                        $('#staff_middle_name').val(data.middle_name);
+                        $('#staff_last_name').val(data.last_name);
+                        $('#staff_prefix_name').val(data.prefix);
+                        $('#staff_suffix_name option[value="' + data.suffix + '"]').prop('selected', true);
+                        $('#staff_title_name').val(data.title);
                         $('#full_name').val(data.full_name);
                         // $('#designation').val(data.designation);
                         $('#designation option[value="' + data.designation + '"]').prop('selected', true);
@@ -406,10 +413,11 @@ include("modals/mr-report-modal.php");
         $(document).ready(function() {
             $(document).on('click', '.viewstaffitems', function(event) {
 
+                var id = $(this).attr("value");
                 var itm1 = $(this).closest('tr').find('#item3').text();
                 var itm2 = $(this).closest('tr').find('#item4').text();
                 var itm3 = $(this).closest('tr').find('#item5').text();
-                $("#btn_pdf").attr("href", "request/select_fetch_table_enduser_items_pdf.php?itm1=" + itm1)
+                $("#btn_pdf").attr("href", "request/select_fetch_table_enduser_items_pdf.php?id="+id);
                 $("#enduser").html(itm1);
                 $("#endusernameid").html(itm1);
                 $("#position").html(itm2);

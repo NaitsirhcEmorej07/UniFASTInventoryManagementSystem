@@ -12,6 +12,12 @@ if (isset($_POST['submitstaffBTN'])) {
     $full_name = $_POST['full_name'];
     $designation = $_POST['designation'];
     $unit = $_POST['unit'];
+    $staff_first_name = $_POST['staff_first_name'];
+    $staff_middle_name = $_POST['staff_middle_name'];
+    $staff_last_name = $_POST['staff_last_name'];
+    $staff_prefix_name = $_POST['staff_prefix_name'];
+    $staff_suffix_name = $_POST['staff_suffix_name'];
+    $staff_title_name = $_POST['staff_title_name'];
     $statusstaff = $_POST['statusstaff'];
 
     switch ($_POST['designation']) {
@@ -50,6 +56,12 @@ if (isset($_POST['submitstaffBTN'])) {
 
     $sql = "update " . $TBL_UNIFAST_STAFF  . " set 
     id_no = UPPER('$id_no'), 
+    first_name = UPPER('$staff_first_name'), 
+    last_name = UPPER('$staff_last_name'), 
+    middle_name= UPPER('$staff_middle_name'), 
+    prefix= UPPER('$staff_prefix_name'), 
+    suffix = UPPER('$staff_suffix_name'), 
+    title= UPPER('$staff_title_name'), 
     full_name = UPPER('$full_name'), 
     designation = UPPER('$designation'),
     abbreviation = UPPER('$abbrebiation'),
@@ -107,17 +119,68 @@ if (isset($_POST['submitstaffBTN'])) {
 
                     <div class="modal-body">
                         <div class="row">
-                            <div class="col-6 mb-3">
+
+                        <div class="col-4">
+                                <label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
+                                        <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
+                                    </svg>
+                                    FIRST NAME
+                                </label>
+                                <input type="text" name="staff_first_name" id="staff_first_name" class="form-control" placeholder="FIRST NAME" autocomplete="off">
+                            </div>
+
+                            <div class="col-4">
+                                <label>
+                                    MIDDLE NAME
+                                </label>
+                                <input type="text" name="staff_middle_name" id="staff_middle_name" class="form-control" placeholder="MIDDLE NAME" autocomplete="off">
+                            </div>
+
+                            <div class="col-4 mb-4">
+                                <label>
+                                    LAST NAME
+                                </label>
+                                <input type="text" name="staff_last_name" id="staff_last_name" class="form-control" placeholder="LAST NAME" autocomplete="off">
+                            </div>
+
+                            <div class="col-4">
+                                <label>
+                                    PREFIX
+                                </label>
+                                <input type="text" name="staff_prefix_name" id="staff_prefix_name" class="form-control" placeholder="PREFIX" autocomplete="off">
+                            </div>
+
+                            <div class="col-4">
+                                <label>
+                                    SUFFIX
+                                </label>
+                                <select type="unit" name="staff_suffix_name" id="staff_suffix_name" class="form-select" aria-label="Default select example">
+                                    <option selected>-SELECT SUFFIX-</option>
+                                    <option value="N/A">N/A</option>
+                                    <option value="JR.">JR.</option>
+                                    <option value="SR.">SR.</option>
+                                </select>
+                            </div>
+
+                            <div class="col-4 mb-4">
+                                <label>
+                                    TITLE
+                                </label>
+                                <input type="text" name="staff_title_name" id="staff_title_name" class="form-control" placeholder="TITLE" autocomplete="off">
+                            </div>
+
+                            <div class="col-4 mb-3">
                                 <label class="p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-card-text" viewBox="0 0 16 16">
                                         <path d="M14.5 3a.5.5 0 0 1 .5.5v9a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h13zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z" />
                                         <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 8a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 8zm0 2.5a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z" />
                                     </svg>
-                                    ID No.</label>
+                                    ID NO.</label>
                                 <input type="text" name="id_no" id="id_no" class="form-control" required>
                             </div>
 
-                            <div class="col-6 mb-3">
+                            <div class="col-4 mb-3" >
                                 <label class="p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
                                         <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z" />
@@ -126,7 +189,7 @@ if (isset($_POST['submitstaffBTN'])) {
                                 <input type="text" name="full_name" id="full_name" class="form-control" readonly>
                             </div>
 
-                            <div class="col-6 mb-3">
+                            <div class="col-4 mb-3">
                                 <label class="p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-person-workspace" viewBox="0 0 16 16">
                                         <path d="M4 16s-1 0-1-1 1-4 5-4 5 3 5 4-1 1-1 1H4Zm4-5.95a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
@@ -145,7 +208,7 @@ if (isset($_POST['submitstaffBTN'])) {
                                 </select>
                             </div>
 
-                            <div class="col-6 mb-3">
+                            <div class="col-4 mb-3">
                                 <label class="p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="currentColor" class="bi bi-person-video2" viewBox="0 0 16 16">
                                         <path d="M10 9.05a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
@@ -163,7 +226,7 @@ if (isset($_POST['submitstaffBTN'])) {
                                 </select>
                             </div>
 
-                            <div class="col-6 mb-3">
+                            <div class="col-4 mb-3">
                                 <label class="p-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-patch-check" viewBox="0 0 16 16">
                                         <path fill-rule="evenodd" d="M10.354 6.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7 8.793l2.646-2.647a.5.5 0 0 1 .708 0z" />

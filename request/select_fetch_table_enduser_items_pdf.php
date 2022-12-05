@@ -113,7 +113,7 @@ class PDF extends PDF_MC_Table
 }
 
 
-if (isset($_GET["itm1"])) {
+if (isset($_GET["id"])) {
 	$sql = "
     SELECT
     " . $TBL_INVENTORY . ".item,
@@ -131,7 +131,7 @@ if (isset($_GET["itm1"])) {
     " . $TBL_INVENTORY . "
     INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id = " . $TBL_END_USER  . ".id
     WHERE
-    " . $TBL_END_USER  . ".end_user = '" . $_GET["itm1"] . "'";
+    " . $TBL_END_USER  . ".enduser_list_id = '" . $_GET["id"] . "'";
 
 	$result = mysqli_query($conn, $sql);
 	$resultCheck = mysqli_num_rows($result);
