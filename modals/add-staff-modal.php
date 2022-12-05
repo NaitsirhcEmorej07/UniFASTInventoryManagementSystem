@@ -128,7 +128,7 @@ if (isset($_POST['submitBTNstaff'])) {
                                     </svg>
                                     FIRST NAME
                                 </label>
-                                <input type="text" name="staff_first_name" class="form-control" placeholder="FIRST NAME" autocomplete="off">
+                                <input type="text" name="staff_first_name" class="form-control" placeholder="FIRST NAME" autocomplete="off" required>
                             </div>
 
                             <div class="col-4">
@@ -142,7 +142,7 @@ if (isset($_POST['submitBTNstaff'])) {
                                 <label>
                                     LAST NAME
                                 </label>
-                                <input type="text" name="staff_last_name" class="form-control" placeholder="LAST NAME" autocomplete="off">
+                                <input type="text" name="staff_last_name" class="form-control" placeholder="LAST NAME" autocomplete="off" required>
                             </div>
 
                             <div class="col-4">
