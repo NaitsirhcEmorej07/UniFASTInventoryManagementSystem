@@ -2,7 +2,7 @@
 session_start();
 include_once '../connections/db-connect.php';
 
-if (isset($_POST["itm1"])) {
+if (isset($_POST["id"])) {
     $sql = "
     SELECT
     " . $TBL_INVENTORY . ".item, 
@@ -19,7 +19,7 @@ if (isset($_POST["itm1"])) {
     INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id=" . $TBL_END_USER  . ".id 
     
 
-    WHERE " . $TBL_END_USER  . ".end_user ='".$_POST["itm1"]."' ";
+    WHERE " . $TBL_END_USER  . ".enduser_list_id ='".$_POST["id"]."' ";
     
 
 

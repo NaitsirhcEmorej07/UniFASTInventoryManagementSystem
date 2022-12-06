@@ -428,7 +428,7 @@ include("modals/mr-report-modal.php");
                     url: "request/select_fetch_table_enduser_items.php",
                     method: "POST",
                     data: {
-                        itm1: itm1
+                        id
                     },
                     dataType: "json",
                     success: function(data) {

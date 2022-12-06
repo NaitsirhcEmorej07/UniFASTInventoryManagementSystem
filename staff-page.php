@@ -66,6 +66,7 @@ $result = mysqli_query($conn, $query);
                             while ($row = mysqli_fetch_array($result)) :
                                 $enduser_list_id = $row["enduser_list_id"];
 
+
                                 $staff_first_name = $row["first_name"];
                                 $staff_middle_name = $row["middle_name"];
                                 $staff_last_name = $row["last_name"];
@@ -75,20 +76,31 @@ $result = mysqli_query($conn, $query);
 
                                 if ($staff_prefix_name == "N/A" || $staff_prefix_name == "") {
                                     $staff_prefix_name = "";
+                                } else {
+                                    $staff_prefix_name = $staff_prefix_name . " ";
                                 }
+
+                                if ($staff_middle_name == "N/A" || $staff_middle_name == "") {
+                                    $staff_middle_name = "";
+                                } else {
+                                    $staff_middle_name = " " . $staff_middle_name;
+                                }
+
                                 if ($staff_suffix_name == "N/A" || $staff_suffix_name == "") {
                                     $staff_suffix_name = "";
+                                } else {
+                                    $staff_suffix_name = ", " . $staff_suffix_name;
                                 }
-                                if ($staff_title_name == "N/A"|| $staff_title_name == "") {
+
+                                if ($staff_title_name == "N/A" || $staff_title_name == "") {
                                     $staff_title_name = "";
+                                } else {
+                                    $staff_title_name = ", " . $staff_title_name;
                                 }
-                                if ($staff_middle_name == "N/A"|| $staff_middle_name == "") {
-                                    $staff_middle_name = "";
-                                }
+
+                                $show_full_name = $staff_prefix_name . $staff_last_name . ", " . $staff_first_name . $staff_middle_name . $staff_suffix_name . $staff_title_name;
+
                                 
-
-
-                                $show_full_name = $staff_prefix_name." ".$staff_last_name.", ".$staff_first_name." ".$staff_middle_name." ".$staff_suffix_name.", ".$staff_title_name;
                                 $id_no = $row["id_no"];
                                 $full_name = $row["full_name"];
                                 $designation = $row["designation"];
@@ -99,13 +111,13 @@ $result = mysqli_query($conn, $query);
                                 // $x = $rowcount=mysqli_num_rows($result);
                             ?>
                                 <tr>
-                                    <td> <?=$x?></td>
-                                    <td><?=$id_no?></td>
-                                    <td id="item3"><?=$show_full_name?></td>
-                                    <td id="item4"><?=$designation?></td>
-                                    <td id="emp_type"><?=$emp_type?></td>
-                                    <td id="item5"><?=$unit?></td>
-                                    <td><?=$status?></td>
+                                    <td> <?= $x ?></td>
+                                    <td><?= $id_no ?></td>
+                                    <td id="item3"><?= $show_full_name ?></td>
+                                    <td id="item4"><?= $designation ?></td>
+                                    <td id="emp_type"><?= $emp_type ?></td>
+                                    <td id="item5"><?= $unit ?></td>
+                                    <td><?= $status ?></td>
                                     <td>
                                         <button type="button" value="<?= $enduser_list_id ?>" class="btn btn-success btn-sm viewstaff">Update</button>
                                         <button type="button" value="<?= $enduser_list_id ?>" class="btn btn-info btn-sm viewstaffitems" id="<?= $enduser_list_id ?>" href="#" data-bs-toggle="modal" data-bs-target="#staff-items-modal">View Items</button>
