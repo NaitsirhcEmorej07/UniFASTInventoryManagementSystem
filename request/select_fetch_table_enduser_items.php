@@ -10,14 +10,15 @@ if (isset($_POST["id"])) {
     " . $TBL_INVENTORY . ".received_by,
     " . $TBL_INVENTORY . ".supplier_warranty,
     " . $TBL_INVENTORY . ".date_acquired,
+    " . $TBL_INVENTORY . ".unit_cost,
     " . $TBL_END_USER  . ".date_received,
     " . $TBL_END_USER  . ".serial_number,
-    " . $TBL_INVENTORY . ".unit_cost
+    " . $TBL_UNIFAST_STAFF  . ".*
     
     
     FROM " . $TBL_INVENTORY . "
-    INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id=" . $TBL_END_USER  . ".id 
-    
+    LEFT JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id=" . $TBL_END_USER  . ".id 
+    LEFT JOIN " . $TBL_UNIFAST_STAFF . " ON " . $TBL_END_USER . ".enduser_list_id = " . $TBL_UNIFAST_STAFF . ".enduser_list_id 
 
     WHERE " . $TBL_END_USER  . ".enduser_list_id ='".$_POST["id"]."' ";
     

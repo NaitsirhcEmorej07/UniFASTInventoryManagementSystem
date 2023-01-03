@@ -307,31 +307,36 @@ include("modals/mr-report-modal.php");
                         suffix = value.suffix;
                         title = value.title;
 
-                        if (prefix == "N/A" || prefix == "") {
-                            prefix = "";
+                        if (lname == null) {
+                            fullname = "";
                         } else {
-                            prefix = prefix+ " ";
-                        }
 
-                        if (mname == "N/A" || mname == "") {
-                            mname = "";
-                        } else {
-                            mname = " " + mname;
-                        }
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
 
-                        if (suffix == "N/A" || suffix == "") {
-                            suffix = "";
-                        } else {
-                            suffix = ", " + suffix;
-                        }
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
 
-                        if (title == "N/A" || title == "") {
-                            title = "";
-                        } else {
-                            title = ", " + title ;
-                        }
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
 
-                        fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
+                        }
+                        
 
                         var convert_date_received = new Date(value.date_received);
                         convert_date_received = convert_date_received.toDateString().toUpperCase().slice(4);
@@ -566,9 +571,50 @@ include("modals/mr-report-modal.php");
                         $('#historybody').html("");
 
                         $.each(data, function(key, value) {
+                            var prefix = "";
+                            var fname = "";
+                            var mname = "";
+                            var lname = "";
+                            var suffix = "";
+                            var title = "";
+                            var fullname = "";
+
+                            prefix = value.prefix;
+                            fname = value.first_name;
+                            mname = value.middle_name;
+                            lname = value.last_name;
+                            suffix = value.suffix;
+                            title = value.title;
+
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
+
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
+
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
+
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
+
                             var convert_date_acquired = new Date(value.date_received);
                             $('#historybody').append("<tr>\
-                                                <td>" + value.end_user + "</td>\
+                                                <td>" + fullname + "</td>\
                                                 <td>" + convert_date_acquired.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.status + "</td>\
                                             </tr>");

@@ -121,21 +121,25 @@ if (isset($_GET["id"])) {
 	" . $TBL_INVENTORY . ".received_by,
 	" . $TBL_INVENTORY . ".supplier_warranty,
 	" . $TBL_INVENTORY . ".date_acquired,
+    " . $TBL_INVENTORY . ".unit_cost,
     " . $TBL_END_USER  . ".date_received,
     " . $TBL_END_USER  . ".serial_number,
     " . $TBL_END_USER  . ".end_user,
     " . $TBL_END_USER  . ".unit,
     " . $TBL_END_USER  . ".designation,
-    " . $TBL_INVENTORY . ".unit_cost
+    " . $TBL_UNIFAST_STAFF  . ".*
     FROM
-    " . $TBL_INVENTORY . "
-    INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id = " . $TBL_END_USER  . ".id
+    " . $TBL_END_USER . "
+    LEFT JOIN " . $TBL_INVENTORY . " ON " . $TBL_INVENTORY . ".id = " . $TBL_END_USER  . ".id 
+    LEFT JOIN " . $TBL_UNIFAST_STAFF . " ON " . $TBL_END_USER . ".enduser_list_id = " . $TBL_UNIFAST_STAFF . ".enduser_list_id 
     WHERE
     " . $TBL_END_USER  . ".enduser_list_id = '" . $_GET["id"] . "'";
 
 	$result = mysqli_query($conn, $sql);
 	$resultCheck = mysqli_num_rows($result);
 	$row = mysqli_fetch_all($result, MYSQLI_ASSOC);
+
+
 
 	// $total += ($row['unit_cost']);
 
@@ -154,38 +158,27 @@ if (isset($_GET["id"])) {
 	$noted_by_designation = "PROJECT TECHNICAL STAFF III";
 
 	//NOTED BY UNIT HEAD:
-	$noted_by_unit_head = null ;
-	$noted_by_unit_head_designation = null ;
-	if($row[0]['unit'] == "ADFIN UNIT"){
+	$noted_by_unit_head = null;
+	$noted_by_unit_head_designation = null;
+	if ($row[0]['unit'] == "ADFIN UNIT") {
 		$noted_by_unit_head = "VIOLETA B. GALO";
 		$noted_by_unit_head_designation = "SUPERVISING EDUCATION PROGRAM SPECIALIST";
-	}
-	
-	elseif($row[0]['unit'] == "OED UNIT"){
+	} elseif ($row[0]['unit'] == "OED UNIT") {
 		$noted_by_unit_head = "ATTY. RYAN L. ESTEVEZ, DPA";
 		$noted_by_unit_head_designation = "UNIFAST EXECUTIVE DIRECTOR";
-	}
-
-	elseif($row[0]['unit'] == "BILLING UNIT"){
+	} elseif ($row[0]['unit'] == "BILLING UNIT") {
 		$noted_by_unit_head = "FLORES, YUUKI";
 		$noted_by_unit_head_designation = "PROJECT TECHNICAL STAFF III";
-	}
-
-	elseif($row[0]['unit'] == "ADVOC UNIT"){
+	} elseif ($row[0]['unit'] == "ADVOC UNIT") {
 		$noted_by_unit_head = "PRECILA A. CHAN";
 		$noted_by_unit_head_designation = "SUPERVISING EDUCATION PROGRAM SPECIALIST";
-	}
-
-	elseif($row[0]['unit'] == "ICT UNIT"){
+	} elseif ($row[0]['unit'] == "ICT UNIT") {
 		$noted_by_unit_head = "JASON A. BAHIL";
 		$noted_by_unit_head_designation = "PROJECT TECHNICAL STAFF III";
-	}
-
-	elseif($row[0]['unit'] == "PMED UNIT"){
+	} elseif ($row[0]['unit'] == "PMED UNIT") {
 		$noted_by_unit_head = "ANNALIZA A. GANDO";
 		$noted_by_unit_head_designation = "SUPERVISING EDUCATION PROGRAM SPECIALIST";
 	}
-	
 }
 
 
@@ -210,7 +203,29 @@ $pdf->SetTextColor(0, 0, 0);
 $pdf->SetFillColor(255, 255, 255);
 $pdf->Cell(27, 5, 'NAME:', 0, 0, 'L', true);
 $pdf->SetFont('Arial', '', 10);
-$pdf->Cell(163, 5, $row[0]['end_user'], 0, 0, 'L', true);
+
+$prefix = $row[0]['prefix'];
+$lname = $row[0]['last_name'];
+$fname = $row[0]['first_name'];
+$mname = $row[0]['middle_name'];
+$suffix = $row[0]['suffix'];
+
+if ($prefix == "N/A" || $prefix == "") {
+	$prefix = "";
+} else {
+	$prefix = $row[0]['prefix'] . " ";
+}
+
+if ($suffix == "N/A" || $suffix == "") {
+	$suffix = "";
+} else {
+	$suffix = $row[0]['suffix'] . " ";
+}
+
+$full_name = $prefix . $lname . ", " .  $fname . " " .  $mname . " " . $suffix;
+
+
+$pdf->Cell(163, 5, $full_name , 0, 0, 'L', true);
 $pdf->Ln();
 $pdf->SetFont('Arial', 'B', 10);
 $pdf->Cell(27, 5, 'DESIGNATION:', 0, 0, 'L', true);
@@ -283,29 +298,32 @@ foreach ($row as $key => $item) {
 	$pdf->SetWidths(array(6, 48, 68, 44, 27, 27, 35, 20));
 	$pdf->SetAligns(array('C', 'L', 'L', 'L', 'C', 'C', 'C', 'C'));
 	if ($key % 2 == 0) {
-		$fillColor = array(255,255,255);
+		$fillColor = array(255, 255, 255);
 	} else {
-		$fillColor = array(192,192,192);
+		$fillColor = array(192, 192, 192);
 	}
-	$pdf->row(array(
-	$key + 1, 
-	$item['item'], 
-	$item['item_description'], 
-	$item['received_by'], 
-	strtoupper($new_date), 
-	strtoupper($warranty_value), 
-	$item['serial_number'], 
-	'P ' . number_format($item['unit_cost'])),
-	array(
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor
-	));
+	$pdf->row(
+		array(
+			$key + 1,
+			$item['item'],
+			$item['item_description'],
+			$item['received_by'],
+			strtoupper($new_date),
+			strtoupper($warranty_value),
+			$item['serial_number'],
+			'P ' . number_format($item['unit_cost'])
+		),
+		array(
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor
+		)
+	);
 
 
 
@@ -373,7 +391,7 @@ $pdf->Cell(150, 5, '', 0, 0, 'L', true);
 $pdf->Ln(15);
 $pdf->SetFont('Arial', 'B', 8);
 $pdf->Cell(10, 5, '', 0, 0, 'C', true);
-$pdf->Cell(50, 5, strtoupper($reviewed_by), 'T', 0, 'C', true);
+$pdf->Cell(50, 5, strtoupper($full_name), 'T', 0, 'C', true);
 $pdf->Cell(130, 5, '', 0, 0, 'L', true);
 $pdf->Cell(50, 5, $noted_by_unit_head, 'T', 0, 'C', true);
 //SPACING

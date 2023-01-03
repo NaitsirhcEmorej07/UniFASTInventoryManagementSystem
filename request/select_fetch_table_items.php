@@ -10,7 +10,7 @@ if (isset($_POST["f1x"])) {
 
     $sql =
     
-    "SELECT * FROM tbl_ims_end_user
+    "SELECT *, tbl_ims_end_user.status FROM tbl_ims_end_user
     left JOIN tbl_unifast_staff ON tbl_unifast_staff.enduser_list_id = tbl_ims_end_user.enduser_list_id
     WHERE
     tbl_ims_end_user.id = " . $_POST["f1x"];
@@ -19,5 +19,4 @@ if (isset($_POST["f1x"])) {
     $row['end_users'] = mysqli_fetch_all($result, MYSQLI_ASSOC);
 
     echo json_encode($row);
-
 }
