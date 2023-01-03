@@ -229,15 +229,15 @@ include("modals/mr-report-modal.php");
             $("#generateqr").val($(this).attr("value"));
             $('#end-user-modal').modal('show');
             var itm0 = $(this).closest('tr').find('#item0').text();
-            var itm1 = $(this).closest('tr').find('#item1').text();
+            // var itm1 = $(this).closest('tr').find('#item1').text();
             var itm2 = $(this).closest('tr').find('#item2').text();
-            var itm3 = $(this).closest('tr').find('#item3').text();
-            var itm4 = $(this).closest('tr').find('#item4').text();
+            // var itm3 = $(this).closest('tr').find('#item3').text();
+            // var itm4 = $(this).closest('tr').find('#item4').text();
             var itm5 = $(this).closest('tr').find('#item5').text();
             $("#btn_pdf2").attr("href", "request/select_fetch_table_items_pdf.php?f1x=" + itm0)
-            $("#desc1").html(itm1);
-            $("#desc3").html(itm3);
-            $("#desc4").html(itm4);
+            // $("#desc1").html(itm1);
+            // $("#desc3").html(itm3);
+            // $("#desc4").html(itm4);
         });
 
 
@@ -279,11 +279,60 @@ include("modals/mr-report-modal.php");
 
                     var convert_date_acquired = new Date(data.date_acquired);
                     $('#testing').html(""); // CLEAR SCREAN BEFORE FETCHING TO AVOID DUPLICATION
+                    $("#desc1").html(data.item);
                     $("#desc2").html(data.item_description);
                     $("#dateacquired").html(convert_date_acquired.toDateString().toUpperCase().slice(4));
                     $("#warranty").html(warranty_value);
                     $("#desc5").html(data.supplier);
+                    $("#desc3").html(data.quantity);
+                    $("#desc4").html(data.unit);
+
+
+
+
                     $.each(data.end_users, function(key, value) {
+
+                        var prefix = "";
+                        var fname = "";
+                        var mname = "";
+                        var lname = "";
+                        var suffix = "";
+                        var title = "";
+                        var fullname = "";
+
+                        prefix = value.prefix;
+                        fname = value.first_name;
+                        mname = value.middle_name;
+                        lname = value.last_name;
+                        suffix = value.suffix;
+                        title = value.title;
+
+                        if (prefix == "N/A" || prefix == "") {
+                            prefix = "";
+                        } else {
+                            prefix = prefix+ " ";
+                        }
+
+                        if (mname == "N/A" || mname == "") {
+                            mname = "";
+                        } else {
+                            mname = " " + mname;
+                        }
+
+                        if (suffix == "N/A" || suffix == "") {
+                            suffix = "";
+                        } else {
+                            suffix = ", " + suffix;
+                        }
+
+                        if (title == "N/A" || title == "") {
+                            title = "";
+                        } else {
+                            title = ", " + title ;
+                        }
+
+                        fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
+
                         var convert_date_received = new Date(value.date_received);
                         convert_date_received = convert_date_received.toDateString().toUpperCase().slice(4);
                         $('#testing').append(`<tr>
@@ -293,7 +342,7 @@ include("modals/mr-report-modal.php");
                                                 <td>${value.ics_number ? value.ics_number : ""}</td>
                                                 <td>${value.status ? value.status : ""}</td>
                                                 <td>${data.received_by ? data.received_by : ""}</td>
-                                                <td>${value.end_user ? value.end_user : ""}</td>
+                                                <td>${fullname ? fullname : ""}</td>
                                                 <td>${convert_date_received == null || convert_date_received == '0000-00-00' || convert_date_received == '' || convert_date_received == 'JAN 01 1970' ? "" : convert_date_received}</td>
 
                                                 <td><button type="button" id="buttonf" value="${value.enduser_id}" class="btn btn-primary btn-sm updateuser" href="#">Edit</button>
@@ -303,6 +352,7 @@ include("modals/mr-report-modal.php");
                                             </tr>`);
                         $('#modal_id').val(f1);
                     })
+
                 }
             });
         }
@@ -417,7 +467,7 @@ include("modals/mr-report-modal.php");
                 var itm1 = $(this).closest('tr').find('#item3').text();
                 var itm2 = $(this).closest('tr').find('#item4').text();
                 var itm3 = $(this).closest('tr').find('#item5').text();
-                $("#btn_pdf").attr("href", "request/select_fetch_table_enduser_items_pdf.php?id="+id);
+                $("#btn_pdf").attr("href", "request/select_fetch_table_enduser_items_pdf.php?id=" + id);
                 $("#enduser").html(itm1);
                 $("#endusernameid").html(itm1);
                 $("#position").html(itm2);

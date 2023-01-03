@@ -10,7 +10,7 @@ include("modals/end-user-modal.php");
 
 
 //query for fetching in table
-$sql = "select full_name from " . $TBL_UNIFAST_STAFF  . " order by full_name asc";
+$sql = "select * from " . $TBL_UNIFAST_STAFF  . " order by last_name ASC";
 $result = $conn->query($sql);
 ?>
 
@@ -120,7 +120,41 @@ $result = $conn->query($sql);
                                     if ($result->num_rows > 0) {
                                         while ($row = $result->fetch_assoc()) {
                                             $name = $row["full_name"];
-                                            echo "<option value='" . $name  . "'>" . $name  . " </option>";
+                                            $enduser_list_id = $row["enduser_list_id"];
+                                            $staff_first_name = $row["first_name"];
+                                            $staff_middle_name = $row["middle_name"];
+                                            $staff_last_name = $row["last_name"];
+                                            $staff_prefix_name = $row["prefix"];
+                                            $staff_suffix_name = $row["suffix"];
+                                            $staff_title_name = $row["title"];
+
+                                            if ($staff_prefix_name == "N/A" || $staff_prefix_name == "") {
+                                                $staff_prefix_name = "";
+                                            } else {
+                                                $staff_prefix_name = $staff_prefix_name . " ";
+                                            }
+
+                                            if ($staff_middle_name == "N/A" || $staff_middle_name == "") {
+                                                $staff_middle_name = "";
+                                            } else {
+                                                $staff_middle_name = " " . $staff_middle_name;
+                                            }
+
+                                            if ($staff_suffix_name == "N/A" || $staff_suffix_name == "") {
+                                                $staff_suffix_name = "";
+                                            } else {
+                                                $staff_suffix_name = ", " . $staff_suffix_name;
+                                            }
+
+                                            if ($staff_title_name == "N/A" || $staff_title_name == "") {
+                                                $staff_title_name = "";
+                                            } else {
+                                                $staff_title_name = ", " . $staff_title_name;
+                                            }
+
+                                            $show_full_name = $staff_prefix_name . $staff_last_name . ", " . $staff_first_name . $staff_middle_name . $staff_suffix_name . $staff_title_name;
+
+                                            echo "<option value='" . $enduser_list_id . "'>" . $show_full_name . " </option>";
                                         }
                                     }
                                     ?>

@@ -7,16 +7,17 @@ if (isset($_POST["f1x"])) {
     $result = mysqli_query($conn, $sql1);
     $row = mysqli_fetch_array($result, MYSQLI_ASSOC);
 
+
+    $sql =
     
-    $sql = "SELECT * FROM " . $TBL_END_USER  . " WHERE id=" . $_POST["f1x"];
+    "SELECT * FROM tbl_ims_end_user
+    left JOIN tbl_unifast_staff ON tbl_unifast_staff.enduser_list_id = tbl_ims_end_user.enduser_list_id
+    WHERE
+    tbl_ims_end_user.id = " . $_POST["f1x"];
+
     $result = mysqli_query($conn, $sql);
     $row['end_users'] = mysqli_fetch_all($result, MYSQLI_ASSOC);
-    
+
     echo json_encode($row);
 
-
-
-
-    // $from_date = "2022-11-04";
-    // $new_date = date('Y-m-d', strtotime('+2 years', strtotime($from_date)));
 }
