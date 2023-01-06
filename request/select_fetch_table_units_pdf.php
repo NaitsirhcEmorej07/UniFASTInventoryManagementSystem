@@ -116,12 +116,13 @@ if (isset($_GET["unit"])) {
     " . $TBL_END_USER  . ".date_received,
     " . $TBL_END_USER  . ".designation,
 	" . $TBL_END_USER  . ".abbreviation,
-    " . $TBL_INVENTORY . ".unit_cost
+    " . $TBL_INVENTORY . ".unit_cost,
+    " . $TBL_UNIFAST_STAFF  . ".*
     
     
     FROM " . $TBL_INVENTORY . "
     INNER JOIN " . $TBL_END_USER  . " ON " . $TBL_INVENTORY . ".id=" . $TBL_END_USER  . ".id 
-    
+    LEFT JOIN " . $TBL_UNIFAST_STAFF . " ON " . $TBL_END_USER . ".enduser_list_id = " . $TBL_UNIFAST_STAFF . ".enduser_list_id
 
     WHERE " . $TBL_END_USER  . ".unit='" . $_GET["unit"] . "' ORDER BY " . $TBL_END_USER  . ".designation DESC, " . $TBL_END_USER  . ".end_user
     ";
@@ -244,34 +245,69 @@ foreach ($row as $key => $item) {
 	// $pdf->Cell(25, 5, $item['date_received'], 0, 0, 'C', true);
 	// $pdf->Ln();
 	if ($key % 2 == 0) {
-		$fillColor = array(255,255,255);
+		$fillColor = array(255, 255, 255);
 	} else {
-		$fillColor = array(192,192,192);
+		$fillColor = array(192, 192, 192);
 	}
+
+	if (strlen($item['last_name']) > 0) {
+		# code...
+		if ($item['prefix'] == "N/A" || $item['prefix'] == "") {
+			$item['prefix'] = "";
+		} else {
+			$item['prefix'] = $item['prefix'] . " ";
+		}
+
+		if ($item['middle_name'] == "N/A" || $item['middle_name'] == "") {
+			$item['middle_name'] = "";
+		} else {
+			$item['middle_name'] = " " . $item['middle_name'];
+		}
+
+		if ($item['suffix'] == "N/A" || $item['suffix'] == "") {
+			$item['suffix'] = "";
+		} else {
+			$item['suffix'] = ", " . $item['suffix'];
+		}
+
+		if ($item['title'] == "N/A" || $item['title'] == "") {
+			$item['title'] = "";
+		} else {
+			$item['title'] = ", " . $item['title'];
+		}
+
+		$show_full_name = $item['prefix'] . $item['last_name'] . ", " . $item['first_name'] . $item['middle_name'] . $item['suffix'] . $item['title'];
+	} else {
+		$show_full_name = "";
+	}
+
 	$new_date = date('M d, Y', strtotime($item['date_received']));
 	$pdf->SetFont('Arial', '', 7);
 	$pdf->SetTextColor(0, 0, 0);
 	$pdf->SetWidths(array(8, 42, 20, 50, 74, 38, 20, 25));
 	$pdf->SetAligns(array('C', 'L', 'L', 'L', 'L', 'L', 'L', 'C'));
-	$pdf->row(array(
-	$key + 1,
-	$item['end_user'],
-	$item['abbreviation'], 
-	$item['item'], 
-	$item['item_description'],
-	$item['serial_number'], 
-	'P ' .  number_format($item['unit_cost']), 
-	strtoupper($new_date)),
-	array(
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor,
-		$fillColor
-	));
+	$pdf->row(
+		array(
+			$key + 1,
+			$show_full_name,
+			$item['abbreviation'],
+			$item['item'],
+			$item['item_description'],
+			$item['serial_number'],
+			'P ' .  number_format($item['unit_cost']),
+			strtoupper($new_date)
+		),
+		array(
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor,
+			$fillColor
+		)
+	);
 }
 
 

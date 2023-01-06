@@ -336,7 +336,7 @@ include("modals/mr-report-modal.php");
                             }
                             fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
                         }
-                        
+
 
                         var convert_date_received = new Date(value.date_received);
                         convert_date_received = convert_date_received.toDateString().toUpperCase().slice(4);
@@ -375,12 +375,55 @@ include("modals/mr-report-modal.php");
                 },
                 dataType: "json",
                 success: function(data) {
+
+                        var prefix = "";
+                        var fname = "";
+                        var mname = "";
+                        var lname = "";
+                        var suffix = "";
+                        var title = "";
+                        var fullname = "";
+
+                        prefix = data.prefix;
+                        fname = data.first_name;
+                        mname = data.middle_name;
+                        lname = data.last_name;
+                        suffix = data.suffix;
+                        title = data.title;
+
+                        if (prefix == "N/A" || prefix == "") {
+                            prefix = "";
+                        } else {
+                            prefix = prefix + " ";
+                        }
+
+                        if (mname == "N/A" || mname == "") {
+                            mname = "";
+                        } else {
+                            mname = " " + mname;
+                        }
+
+                        if (suffix == "N/A" || suffix == "") {
+                            suffix = "";
+                        } else {
+                            suffix = ", " + suffix;
+                        }
+
+                        if (title == "N/A" || title == "") {
+                            title = "";
+                        } else {
+                            title = ", " + title;
+                        }
+
+                        fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
+                    
+
                     console.log(data);
                     $('#update-enduser-modal').modal('show');
                     $('#btn_done_useredit').val(data.enduser_id);
                     $('#enduser_id').val(data.enduser_id);
-                    $('#end_user').val(data.end_user);
-                    $('#select2-end_user-container').html(data.end_user);
+                    $('#end_user').val(data.enduser_list_id);
+                    $('#select2-end_user-container').html(fullname);
                     $('#date_received').val(data.date_received);
                     $('#serial_number').val(data.serial_number);
                     $('#inventory_item_number').val(data.inventory_item_number);
@@ -650,11 +693,51 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var prefix = "";
+                            var fname = "";
+                            var mname = "";
+                            var lname = "";
+                            var suffix = "";
+                            var title = "";
+                            var fullname = "";
+
+                            prefix = value.prefix;
+                            fname = value.first_name;
+                            mname = value.middle_name;
+                            lname = value.last_name;
+                            suffix = value.suffix;
+                            title = value.title;
+
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
+
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
+
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
+
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
                             var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
-                                                <td>" + value.end_user + "</td>\
+                                                <td>" + fullname + "</td>\
                                                 <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
@@ -695,11 +778,51 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var prefix = "";
+                            var fname = "";
+                            var mname = "";
+                            var lname = "";
+                            var suffix = "";
+                            var title = "";
+                            var fullname = "";
+
+                            prefix = value.prefix;
+                            fname = value.first_name;
+                            mname = value.middle_name;
+                            lname = value.last_name;
+                            suffix = value.suffix;
+                            title = value.title;
+
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
+
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
+
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
+
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
                             var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
-                                                <td>" + value.end_user + "</td>\
+                                                <td>" + fullname + "</td>\
                                                 <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
@@ -740,11 +863,51 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var prefix = "";
+                            var fname = "";
+                            var mname = "";
+                            var lname = "";
+                            var suffix = "";
+                            var title = "";
+                            var fullname = "";
+
+                            prefix = value.prefix;
+                            fname = value.first_name;
+                            mname = value.middle_name;
+                            lname = value.last_name;
+                            suffix = value.suffix;
+                            title = value.title;
+
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
+
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
+
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
+
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
                             var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
-                                                <td>" + value.end_user + "</td>\
+                                                <td>" + fullname + "</td>\
                                                 <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
@@ -785,11 +948,51 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var prefix = "";
+                            var fname = "";
+                            var mname = "";
+                            var lname = "";
+                            var suffix = "";
+                            var title = "";
+                            var fullname = "";
+
+                            prefix = value.prefix;
+                            fname = value.first_name;
+                            mname = value.middle_name;
+                            lname = value.last_name;
+                            suffix = value.suffix;
+                            title = value.title;
+
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
+
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
+
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
+
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
                             var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
-                                                <td>" + value.end_user + "</td>\
+                                                <td>" + fullname + "</td>\
                                                 <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
@@ -831,11 +1034,51 @@ include("modals/mr-report-modal.php");
                         let php1 = Intl.NumberFormat('en-US');
 
                         $.each(data, function(key, value) {
+                            var prefix = "";
+                            var fname = "";
+                            var mname = "";
+                            var lname = "";
+                            var suffix = "";
+                            var title = "";
+                            var fullname = "";
+
+                            prefix = value.prefix;
+                            fname = value.first_name;
+                            mname = value.middle_name;
+                            lname = value.last_name;
+                            suffix = value.suffix;
+                            title = value.title;
+
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
+
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
+
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
+
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
                             var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
-                                                <td>" + value.end_user + "</td>\
+                                                <td>" + fullname + "</td>\
                                                 <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\
@@ -876,11 +1119,51 @@ include("modals/mr-report-modal.php");
                         var total = 0;
                         let php1 = Intl.NumberFormat('en-US');
                         $.each(data, function(key, value) {
+                            var prefix = "";
+                            var fname = "";
+                            var mname = "";
+                            var lname = "";
+                            var suffix = "";
+                            var title = "";
+                            var fullname = "";
+
+                            prefix = value.prefix;
+                            fname = value.first_name;
+                            mname = value.middle_name;
+                            lname = value.last_name;
+                            suffix = value.suffix;
+                            title = value.title;
+
+                            if (prefix == "N/A" || prefix == "") {
+                                prefix = "";
+                            } else {
+                                prefix = prefix + " ";
+                            }
+
+                            if (mname == "N/A" || mname == "") {
+                                mname = "";
+                            } else {
+                                mname = " " + mname;
+                            }
+
+                            if (suffix == "N/A" || suffix == "") {
+                                suffix = "";
+                            } else {
+                                suffix = ", " + suffix;
+                            }
+
+                            if (title == "N/A" || title == "") {
+                                title = "";
+                            } else {
+                                title = ", " + title;
+                            }
+
+                            fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
                             var convert_date = new Date(value.date_received);
                             $('#table-body-unit-reports').append("<tr>\
                                                 <td>" + (parseInt(key) + 1) + "</td>\
                                                 <td>" + value.designation + "</td>\
-                                                <td>" + value.end_user + "</td>\
+                                                <td>" + fullname + "</td>\
                                                 <td>" + convert_date.toDateString().toUpperCase().slice(4) + "</td>\
                                                 <td>" + value.item + "</td>\
                                                 <td>" + value.item_description + "</td>\

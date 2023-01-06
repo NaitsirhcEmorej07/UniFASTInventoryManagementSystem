@@ -152,7 +152,7 @@ $result = $conn->query($sql);
                                                 $staff_title_name = ", " . $staff_title_name;
                                             }
 
-                                            $show_full_name = $staff_prefix_name . $staff_last_name . ", " . $staff_first_name . $staff_middle_name . $staff_suffix_name . $staff_title_name;
+                                            $show_full_name = $staff_prefix_name . $staff_last_name . ", " . $staff_first_name . " " .$staff_middle_name . $staff_suffix_name . $staff_title_name;
 
                                             echo "<option value='" . $enduser_list_id . "'>" . $show_full_name . " </option>";
                                         }
