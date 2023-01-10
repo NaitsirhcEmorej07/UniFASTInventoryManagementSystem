@@ -152,7 +152,7 @@ $result = $conn->query($sql);
                                                 $staff_title_name = ", " . $staff_title_name;
                                             }
 
-                                            $show_full_name = $staff_prefix_name . $staff_last_name . ", " . $staff_first_name . " " .$staff_middle_name . $staff_suffix_name . $staff_title_name;
+                                            $show_full_name = $staff_prefix_name . $staff_last_name . ", " . $staff_first_name . " " . $staff_middle_name . $staff_suffix_name . $staff_title_name;
 
                                             echo "<option value='" . $enduser_list_id . "'>" . $show_full_name . " </option>";
                                         }
@@ -170,6 +170,34 @@ $result = $conn->query($sql);
                                     Date Received</label>
                                 <input type="date" name="date_received" id="date_received" class="form-control" required>
                             </div>
+
+                            <div class="col-6">
+                                <label>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" fill="currentColor" class="bi bi-person-fill" viewBox="0 0 16 16">
+                                        <path d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3Zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" />
+                                    </svg>
+                                    MR To</label>
+
+                                <select type="text" name="transfer_mr" id="transfer_mr" class="form-select" aria-label="Default select example">
+                                    <option selected>-SELECT PLANTILLA-</option>
+                                    <?php
+                                    $sqlplantilla = "select full_name from " . $TBL_UNIFAST_STAFF . " where employment_type = 'PLANTILLA' order by full_name asc";
+                                    $result = $conn->query($sqlplantilla);
+                                    if ($result->num_rows > 0) {
+                                        while ($row = $result->fetch_assoc()) {
+                                            $name = $row["full_name"];
+                                            echo "<option value='" . $name  . "'>" . $name  . " </option>";
+                                        }
+                                    }
+                                    ?>
+                                    <!-- <option value="AMPIL, MA. CLARA A">AMPIL, MA. CLARA A.</option>
+                                    <option value="CHAN, PRECILA A.">CHAN, PRECILA A.</option>
+                                    <option value="ESTEVEZ, RYAN L.">ESTEVEZ, RYAN L.</option>
+                                    <option value="GANDO, ANNALIZA A.">GANDO, ANNALIZA A.</option>
+                                    <option value="TOQUE, RODERICK V.">TOQUE, RODERICK V.</option> -->
+                                </select>
+                            </div>
+
                         </div>
                     </div>
 

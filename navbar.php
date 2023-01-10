@@ -20,13 +20,13 @@ include("modals/add-staff-modal.php");
 include("modals/update-staff-modal.php");
 include("modals/end-user-modal.php");
 include("modals/update-enduser-modal.php");
-include("modals/qr-path-modal.php");
 include("modals/scanqr-modal.php");
 include("modals/staff-items-modal.php");
 include("modals/item-history-modal.php");
 include("modals/unit-reports-select-modal.php");
 include("modals/unit-reports-modal.php");
 include("modals/mr-report-modal.php");
+include("modals/qr-path-modal.php"); 
 ?>
 
 <!DOCTYPE html>
@@ -134,6 +134,15 @@ include("modals/mr-report-modal.php");
 
             $('#table_staff').DataTable();
         });
+
+
+        $(document).ready(function() {
+            $(document).on('click', '.delete_items', function(event) {
+                // alert("hey");
+                $('#qr-path-modal').modal('show');
+            });
+        });
+
 
         //UNIFAST GENERATED SERIAL
         $(document).ready(function() {
@@ -376,21 +385,24 @@ include("modals/mr-report-modal.php");
                 dataType: "json",
                 success: function(data) {
 
-                        var prefix = "";
-                        var fname = "";
-                        var mname = "";
-                        var lname = "";
-                        var suffix = "";
-                        var title = "";
-                        var fullname = "";
+                    var prefix = "";
+                    var fname = "";
+                    var mname = "";
+                    var lname = "";
+                    var suffix = "";
+                    var title = "";
+                    var fullname = "";
 
-                        prefix = data.prefix;
-                        fname = data.first_name;
-                        mname = data.middle_name;
-                        lname = data.last_name;
-                        suffix = data.suffix;
-                        title = data.title;
+                    prefix = data.prefix;
+                    fname = data.first_name;
+                    mname = data.middle_name;
+                    lname = data.last_name;
+                    suffix = data.suffix;
+                    title = data.title;
 
+                    if (lname == "" || lname == null) {
+                        fullname = "";
+                    } else {
                         if (prefix == "N/A" || prefix == "") {
                             prefix = "";
                         } else {
@@ -416,7 +428,7 @@ include("modals/mr-report-modal.php");
                         }
 
                         fullname = prefix + lname + ", " + fname + " " + mname + suffix + title;
-                    
+                    }
 
                     console.log(data);
                     $('#update-enduser-modal').modal('show');
@@ -429,6 +441,7 @@ include("modals/mr-report-modal.php");
                     $('#inventory_item_number').val(data.inventory_item_number);
                     $('#ics_number').val(data.ics_number);
                     $('#status option[value="' + data.status + '"]').prop('selected', true);
+                    $('#transfer_mr option[value="' + data.received_by + '"]').prop('selected', true);
                 }
             })
         });

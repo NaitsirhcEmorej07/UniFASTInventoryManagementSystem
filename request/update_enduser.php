@@ -9,6 +9,7 @@ $serial_number = $_POST['serial_number'];
 $inventory_item_number = $_POST['inventory_item_number'];
 $ics_number = $_POST['ics_number'];
 $status = $_POST['status'];
+$transfer_mr = $_POST['transfer_mr'];
 
 
 $sql1 = "select unit, enduser_list_id, designation, abbreviation,  employment_type from " . $TBL_UNIFAST_STAFF  . " where enduser_list_id  = '" . $_POST["end_user"] . "' ";
@@ -63,47 +64,50 @@ while ($row = mysqli_fetch_array($result)) {
     $qid = $row["id"];
 }
 
+//QUERY FOR TRANSFER OF MR
+$sql_transfer_mr = "update " . $TBL_INVENTORY  . " 
+    set 
+    received_by =UPPER('$transfer_mr')
+    where id='$qid' ";
+$conn->query($sql_transfer_mr) or die($conn->error);
+
 
 //QUERY FOR ITEM LOGS GET ENDUSER
 $sqlx = "select end_user from " . $TBL_LOGS  . " where serial_number = '$serial_number' order by log_id desc ";
 $result = mysqli_query($conn, $sqlx);
 $row = mysqli_fetch_row($result);
-
 $qenduser = $row[0];
-
 // echo $qenduser . ' + ' . $end_user;
 
-    
-if (strtoupper(trim($end_user)) != strtoupper(trim($qenduser))) {
-        //QUERY FOR ITEM LOGS
-        $sqlnew = "insert into " . $TBL_LOGS  . "(id, serial_number, end_user, status, date_received) values(UPPER('$qid'), UPPER('$serial_number'), UPPER('$end_user'), UPPER('$status'), UPPER('$date_received'))";
-        $conn->query($sqlnew) or die ($conn->error); 
 
-        //QUERY FOR UPDATING IS_ASSIGNED
-        $sqlass = "update " . $TBL_END_USER  . " 
+if (strtoupper(trim($end_user)) != strtoupper(trim($qenduser))) {
+    //QUERY FOR ITEM LOGS
+    $sqlnew = "insert into " . $TBL_LOGS  . "(id, serial_number, end_user, status, date_received) values(UPPER('$qid'), UPPER('$serial_number'), UPPER('$end_user'), UPPER('$status'), UPPER('$date_received'))";
+    $conn->query($sqlnew) or die($conn->error);
+
+    //QUERY FOR UPDATING IS_ASSIGNED
+    $sqlass = "update " . $TBL_END_USER  . " 
         set 
         is_assigned =UPPER('1')
         where enduser_id='$enduser_id' ";
-        $conn->query($sqlass) or die($conn->error);
+    $conn->query($sqlass) or die($conn->error);
 
-        //QUERY FOR SUM OF IS_ASSIGNED
-        $sqlnew1 = "
+    //QUERY FOR SUM OF IS_ASSIGNED
+    $sqlnew1 = "
         SELECT SUM(is_assigned)
         FROM " . $TBL_END_USER  . "
         WHERE id='$qid'
         ";
-        $result = mysqli_query($conn, $sqlnew1);
-        while ($row = mysqli_fetch_array($result)) {
-            $count = $row["SUM(is_assigned)"];
-        }
+    $result = mysqli_query($conn, $sqlnew1);
+    while ($row = mysqli_fetch_array($result)) {
+        $count = $row["SUM(is_assigned)"];
+    }
 
 
-        //QUERY FOR ASSIGNED FOR INVENTORY TABLE
-        $sqlnew2 = "Update " . $TBL_INVENTORY . " set assigned ='$count' where id='$qid' ";
-        $conn->query($sqlnew2) or die ($conn->error); 
-}
-else
-{
+    //QUERY FOR ASSIGNED FOR INVENTORY TABLE
+    $sqlnew2 = "Update " . $TBL_INVENTORY . " set assigned ='$count' where id='$qid' ";
+    $conn->query($sqlnew2) or die($conn->error);
+} else {
     $sql_update_date_received = "update " . $TBL_LOGS  . " set date_received = UPPER('$date_received')  
     where serial_number = '$serial_number' and end_user = '$end_user' ";
     $conn->query($sql_update_date_received) or die($conn->error);
@@ -113,12 +117,12 @@ else
 
 require_once '../phpqrcode/qrlib.php';
 
-                $qrs = $_POST['serial_number'];
-                $path = '../qrcode/';
-                $file = $path.$qrs.".png";
-                // $input = "NAITSIRHC"; 
-                
-                QRcode::png($qrs, $file, 'H', 4, 1);
+$qrs = $_POST['serial_number'];
+$path = '../qrcode/';
+$file = $path . $qrs . ".png";
+// $input = "NAITSIRHC"; 
+
+QRcode::png($qrs, $file, 'H', 4, 1);
                 //png, input, file, ECC_LEVEL (L,M,Q,H), pixel size, frame size
 
                 // echo "<img src='".$file."'>";

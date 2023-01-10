@@ -6,7 +6,8 @@ if (isset($_POST["viewupdatebtnx"])) {
 
     $sql = "SELECT * FROM " . $TBL_END_USER  . " 
     LEFT JOIN " . $TBL_UNIFAST_STAFF . " ON " . $TBL_END_USER . ".enduser_list_id = " . $TBL_UNIFAST_STAFF . ".enduser_list_id 
-    
+    LEFT JOIN " . $TBL_INVENTORY  . " ON " . $TBL_END_USER . ".id = " . $TBL_INVENTORY . ".id 
+
     WHERE enduser_id='".$_POST["viewupdatebtnx"]."' ";
     $result = mysqli_query($conn, $sql);
 
